@@ -1,23 +1,23 @@
 {
-  "name": "smop",
-  "version": "0.0.0",
-  "description": "smop.",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/AlexShukhman/site4-smop.git"
-  },
-  "author": "alex shukhman",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/AlexShukhman/site4-smop/issues"
-  },
-  "homepage": "https://github.com/AlexShukhman/site4-smop#readme",
-  "dependencies": {
-    "express": "^4.14.0",
-    "pug": "^2.0.0-beta6"
-  }
+	"name": "smop"
+	, "version": "0.0.0"
+	, "description": "smop."
+	, "main": "routes/index.js"
+	, "scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	}
+	, "repository": {
+		"type": "git"
+		, "url": "git+https://github.com/AlexShukhman/site4-smop.git"
+	}
+	, "author": "alex shukhman"
+	, "license": "ISC"
+	, "bugs": {
+		"url": "https://github.com/AlexShukhman/site4-smop/issues"
+	}
+	, "homepage": "https://github.com/AlexShukhman/site4-smop#readme"
+	, "dependencies": {
+		"express": "^4.14.0"
+		, "pug": "^2.0.0-beta6"
+	}
 }
