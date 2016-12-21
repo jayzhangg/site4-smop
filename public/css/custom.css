@@ -264,3 +264,16 @@ option.html
 	text-decoration: none;
 	color: inherit;
 }
+
+
+/**********
+ACE.js stuff
+*/
+
+#editor {
+	position: absolute;
+	top: 0;
+	right: 0;
+	left: 0;
+	bottom: 0;
+}
