@@ -4,7 +4,10 @@ var router = express.Router();
 router.get('/', function (req, res) {
 	res.render('index');
 });
-router.get('/optionPage1', (req, res) => {
-	res.render('optionPage1');
+router.get('/options', (req, res) => {
+	res.render('options');
+});
+router.get('/coder_home', (req, res) => {
+	res.render('coder_home');
 });
 module.exports = router;
