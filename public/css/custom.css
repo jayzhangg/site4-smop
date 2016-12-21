@@ -222,3 +222,47 @@ input[type=password]:hover {
 	font-style: normal;
 	font-weight: bold;
 }
+
+
+/**********
+Option.html
+*/
+
+.choice {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 0;
+	margin: auto;
+	display: flex;
+	background-color: aquamarine;
+}
+
+.choice > div {
+	flex: 1;
+	/*grow*/
+}
+
+.clr {
+	width: 50vw;
+	/* half viewer width */
+	height: 50vh;
+	margin: auto;
+	text-align: center;
+}
+
+.choicetext {
+	font-size: 20vmin;
+	font-family: Courier New, Courier, Lucida Sans Typewriter, Lucida Typewriter, monospace;
+	color: #808070;
+	text-decoration: none;
+	font-weight: lighter;
+	margin: auto;
+}
+
+.choicetext:hover {
+	text-decoration: none;
+	color: inherit;
+}

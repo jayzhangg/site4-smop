@@ -38,7 +38,7 @@ function login() {
 	};
 	$('#loginForm').hide();
 	if (isEquivalent(userInput, testLogin)) {
-		window.location.href = "../views/optionPage1";
+		window.location.href = "optionPage1";
 	}
 	else {
 		$('#logInOut').append('well... I mean you could have tried to remember your password...');
