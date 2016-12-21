@@ -225,7 +225,7 @@ input[type=password]:hover {
 
 
 /**********
-Option.html
+option.html
 */
 
 .choice {
@@ -234,7 +234,8 @@ Option.html
 	bottom: 0;
 	left: 0;
 	right: 0;
-	height: 0;
+	height: 0px;
+	/* change to 2px to see CL */
 	margin: auto;
 	display: flex;
 	background-color: aquamarine;
@@ -255,9 +256,6 @@ Option.html
 
 .choicetext {
 	font-size: 20vmin;
-	font-family: Courier New, Courier, Lucida Sans Typewriter, Lucida Typewriter, monospace;
-	color: #808070;
-	text-decoration: none;
 	font-weight: lighter;
 	margin: auto;
 }
