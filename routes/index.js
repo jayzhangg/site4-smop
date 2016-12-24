@@ -1,4 +1,6 @@
 var express = require('express');
+var app = express();
+app.use(express.static('public'))
 var router = express.Router();
 /* GET home page. */
 router.get('/', function (req, res) {
