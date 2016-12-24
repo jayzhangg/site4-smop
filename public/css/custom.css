@@ -276,6 +276,7 @@ ACE.js stuff
 	right: 0;
 	left: 0;
 	bottom: 0;
+	border: 1px solid #f0f0f0;
 }
 
 
@@ -284,10 +285,6 @@ Resizable JQuery stuff
 */
 
 #resizable {
-	width: 150px;
-	height: 150px;
-	padding: 0.5em;
-	word-wrap: normal;
-	text-overflow: clip;
-	border: 1px solid #aaa;
+	width: 50vw;
+	height: 50vh;
 }
