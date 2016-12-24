@@ -277,3 +277,17 @@ ACE.js stuff
 	left: 0;
 	bottom: 0;
 }
+
+
+/**********
+Resizable JQuery stuff
+*/
+
+#resizable {
+	width: 150px;
+	height: 150px;
+	padding: 0.5em;
+	word-wrap: normal;
+	text-overflow: clip;
+	border: 1px solid #aaa;
+}
