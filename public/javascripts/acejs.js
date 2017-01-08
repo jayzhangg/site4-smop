@@ -4,4 +4,4 @@ editor.getSession().setMode("ace/mode/javascript");
 editor.setShowPrintMargin(false);
 editor.setFadeFoldWidgets(true);
 editor.setHighlightActiveLine(true);
-editor.setPersistentHScroll(true);
+editor.$PersistentHScroll = Infinity;
