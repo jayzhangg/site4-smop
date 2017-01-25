@@ -13,6 +13,7 @@ Welcome to the second version of the app (I done fucked up the first one)! Below
 
 ##Some Helpful Resources 
 * http://justbuildsomething.com/node-js-best-practices/#3
+* https://zellwk.com/blog/crud-express-mongodb/
 
 ##html/Pug Etiquette (aka how to make a page)
 * html and Pug files are located in the views folder
