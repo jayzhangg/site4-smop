@@ -9,12 +9,11 @@
 	<div class='container' id='loginContainer'> <a class="loginButtonFont" href="#" onclick="openLogin()">Login</a> </div>
 	<div id="loginForm" class="container">
 		<br/>
-		<div class="form">
-			<label>User: </label>
-			<input id="user" class="customInput" type="text">
+		<form action="/login" method="post">
+			<input name="user" placeholder="user" class="customInput" type="text">
 			<br/>
-			<label>Pass: </label>
-			<input id="pass" class="customInput" type="password"> <a class="loginButtonFont-two" href="#" onclick="login()">Login</a> <a href="#">Forgot password?</a> </div>
+			<input name="pass" placeholder="password" class="customInput" type="password">
+			<button type="submit">Login</button> <a href="#">Forgot password?</a> </div>
 	</div>
 	<div id="logInOut" class="fixme"></div>
 	<!-- load js -->
