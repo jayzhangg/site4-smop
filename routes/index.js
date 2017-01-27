@@ -24,14 +24,14 @@ router.post('/login', (req, res) => {
 	// ** w00t sql injection without sql like a boss <- aka, somebody please fix my life ** -- also note this is the dev mlab db, its got like a meg of storage because im cheap as ****
 	var connectString = 'mongodb://' + usrPost['user'] + ':' + usrPost['pass'] + '@ds145128.mlab.com:45128/smop'
 		// ** for testing connection string **
-		//console.log(connectString);
-		// realtalk, are we really connecting each time with this damn connect function? thats a lot to handle (geddit?)
+	console.log(connectString);
+	// realtalk, are we really connecting each time with this damn connect function? thats a lot to handle (geddit?)
 	MongoClient.connect(connectString, (err, database) => {
 		if (err) return console.log(err)
 		db = database
 		var d = new Date();
 		// ** if you're curious what the date should look like in the database **
-		//console.log(d.toTimeString() + ' ' + d.toDateString())
+		console.log(d.toTimeString() + ' ' + d.toDateString())
 		usrPost["dateTime"] = d.toTimeString() + " " + d.toDateString();
 		db.collection('loginreqs').save(usrPost, (err, result) => {
 			// ** oh hiya giant bug i don't know how to deal with! ** -- if error->just crap out and die
