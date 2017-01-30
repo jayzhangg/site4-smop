@@ -287,4 +287,5 @@ Resizable JQuery stuff
 #resizable {
 	width: 50vw;
 	height: 50vh;
+	left: 3vw;
 }

@@ -40,10 +40,11 @@ function normalizePort(val) {
  * Event listener for HTTP server "error" event.
  */
 function onError(error) {
+	var p = port;
 	if (error.syscall !== 'listen') {
 		throw error;
 	}
-	var bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port;
+	var bind = typeof p === 'string' ? 'Pipe ' + p : 'Port ' + p;
 	// handle specific listen errors with friendly messages
 	switch (error.code) {
 	case 'EACCES':
@@ -62,7 +63,8 @@ function onError(error) {
  * Event listener for HTTP server "listening" event.
  */
 function onListening() {
-	var addr = server.address();
+	var s = server;
+	var addr = s.address();
 	var bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;
 	debug('Listening on ' + bind);
 }
