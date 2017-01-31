@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 var http = require('http');
-var qs = require("querystring")
+var qs = require("querystring");
 var token = '';
 var apicall = {
 	host: 'localhost:3001/'
@@ -24,19 +24,18 @@ router.get('/options', (req, res) => {
 router.get('/coder_home', (req, res) => {
 	res.render('coder_home');
 });
-router.post('/login', (req, res) => {
+router.post('/createUser', (req, res) => {
 	var options = {
 		"method": "POST"
 		, "hostname": "localhost"
 		, "port": "3001"
-		, "path": "/api/authenticate"
+		, "path": "/newuser"
 		, "headers": {
 			"content-type": "application/x-www-form-urlencoded"
 			, "cache-control": "no-cache"
-			, "postman-token": "d6e25f06-55a2-0e52-dba9-f3c94373705b"
 		}
 	};
-	var req = http.request(options, function (result) {
+	var reqInner = http.request(options, function (result) {
 		var chunks = [];
 		result.on("data", function (chunk) {
 			chunks.push(chunk);
@@ -52,10 +51,44 @@ router.post('/login', (req, res) => {
 			}
 		});
 	});
-	req.write(qs.stringify({
-		name: 'alexshukhman'
-		, password: 'smop1'
+	reqInner.write(qs.stringify({
+		name: req.body.user
+		, password: req.body.pass
 	}));
-	req.end();
+	reqInner.end();
+});
+router.post('/login', (req, res) => {
+	var options = {
+		"method": "POST"
+		, "hostname": "localhost"
+		, "port": "3001"
+		, "path": "/api/authenticate"
+		, "headers": {
+			"content-type": "application/x-www-form-urlencoded"
+			, "cache-control": "no-cache"
+		}
+	};
+	var reqInner = http.request(options, function (result) {
+		var chunks = [];
+		result.on("data", function (chunk) {
+			chunks.push(chunk);
+		});
+		result.on("end", function () {
+			var body = JSON.parse(Buffer.concat(chunks).toString());
+			if (body.success) {
+				token = body.token;
+				res.redirect('/options');
+			}
+			else {
+				res.redirect('/');
+			}
+		});
+	});
+	console.log(req.body.user)
+	reqInner.write(qs.stringify({
+		name: req.body.user
+		, password: req.body.pass
+	}));
+	reqInner.end();
 });
 module.exports = router;
