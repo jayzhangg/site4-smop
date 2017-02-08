@@ -1,5 +1,6 @@
 function openLogin() {
 	$('#loginContainer').hide();
+	$('#newUserButton').hide();
 	$('#loginForm').show();
 }
 
@@ -19,24 +20,10 @@ function getHour() {
 		return 'time error... wut.'
 	}
 }
-
-function openNewUser() {
-	$('#newUserButton').hide();
-	$('#loginButton').hide();
-	$('#newUserForm').show();
-}
-$('#passCheck').on('keyup', function () {
-	if ($('#pass').val() == $('#passCheck').val()) {
-		$('#passwordError').hide();
-	}
-	else $('#passwordError').show();
-});
 // Pre Load Function
 (function () {
 	$('#heroImage').html('Good ' + getHour() + '.');
 	$('#loginForm').hide();
-	$('#passwordError').hide();
-	$('#newUserForm').hide();
 })();
 $(document).ready(function () {
 	//all js that happens after load

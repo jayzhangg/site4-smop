@@ -1,0 +1,178 @@
+/**********
+General
+*/
+
+head {
+	padding-top: 80px;
+	padding-bottom: 40px;
+	background-color: #fafafa;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+body {
+	padding-top: 80px;
+	padding-bottom: 40px;
+	background-color: #fafafa;
+	font: normal 14px 'Lato', sans-serif;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+a {
+	font-family: Courier New, Courier, Lucida Sans Typewriter, Lucida Typewriter, monospace;
+	color: #808070;
+	text-decoration: none;
+	font-weight: bolder;
+}
+
+.loginButtonFont {
+	display: block;
+	font-size: 25pt;
+	text-align: center;
+	margin: 30px auto;
+}
+
+.customInput {
+	background-color: #fafafa !important;
+	width: 200px !important;
+	height: 14pt !important;
+	padding-left: 4px !important;
+	border-style: none !important;
+}
+
+.customInput:focus {
+	outline-color: #808070;
+}
+
+
+/* custom */
+
+.customButton {
+	font-family: Courier New, Courier, Lucida Sans Typewriter, Lucida Typewriter, monospace;
+	color: #808070 !important;
+	text-decoration: none;
+	font-weight: bolder;
+	display: inline-block;
+	font-size: 14pt;
+	padding: 0px;
+	appearance: none;
+	box-shadow: none;
+	border-radius: 0;
+	background-color: #fafafa;
+	border: none;
+	display: block;
+	text-align: center;
+	margin: 10px auto;
+}
+
+.cbalt {
+	text-align: left;
+	margin-left: 20vw;
+}
+
+.containerCustom {
+	margin: 40 auto;
+}
+
+
+/*hero image*/
+
+.Basic-Paragraph {
+	-epub-ruby-position: over;
+	color: #202020;
+	font-size: 12px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: normal;
+	line-height: 1.2;
+	margin-top: auto;
+	margin-bottom: auto;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	text-decoration: none;
+	text-indent: 0px;
+}
+
+.para-style-override-1 {
+	margin-top: 10vh;
+	font-size: 82px;
+	font-style: normal;
+	font-weight: bold;
+}
+
+
+/* login form */
+
+.loginForm {
+	margin: auto;
+	width: 200px;
+}
+
+
+/**********
+option.html
+*/
+
+.choice {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 0px;
+	/* change to 2px to see CL */
+	margin: auto;
+	display: flex;
+	background-color: aquamarine;
+}
+
+.choice > div {
+	flex: 1;
+	/*grow*/
+}
+
+.clr {
+	width: 50vw;
+	/* half viewer width */
+	height: 50vh;
+	margin: auto;
+	text-align: center;
+}
+
+.choicetext {
+	font-size: 15vmin;
+	font-weight: lighter;
+	margin: auto;
+}
+
+.choicetext:hover {
+	text-decoration: none;
+	color: inherit;
+}
+
+
+/**********
+ACE.js stuff
+*/
+
+#editor {
+	position: absolute;
+	top: 0;
+	right: 0;
+	left: 0;
+	bottom: 0;
+	border: 1px solid #f0f0f0;
+}
+
+
+/**********
+Resizable JQuery stuff
+*/
+
+#resizable {
+	width: 50vw;
+	height: 50vh;
+	left: 3vw;
+}

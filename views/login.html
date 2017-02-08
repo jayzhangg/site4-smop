@@ -17,18 +17,7 @@
 			<button class="customButton" type="submit"><a>Login</a></button>
 			<br/> <a href="#">Forgot password?</a> </div>
 	</div>
-	<div id="newUserForm" class='loginForm' action="/createUser" method='post'>
-		<input name="user" placeholder="user" class="customInput" type="text">
-		<br/>
-		<input id='pass' name="pass" placeholder="password" class="customInput" type="password">
-		<br/>
-		<input id='passCheck' name="passCheck" placeholder="re-enter password" class="customInput" type="password">
-		<br/>
-		<p id="passwordError" style="color:red;">passwords don't match.</p>
-		<br/>
-		<button class="customButton" type="submit"><a>Submit</a></button>
-	</div>
-	<br/><a id='newUserButton' class="loginButtonFont" href='#' style="font-size:12pt;" onclick="openNewUser()">New User?</a>
+	<br/><a id='newUserButton' class="loginButtonFont" href='new_user' style="font-size:12pt;">New User?</a>
 	<!-- load js -->
 	<script src="javascripts/login.js"></script>
 </body>

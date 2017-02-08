@@ -1,0 +1,24 @@
+<body>
+	<!--hero image-->
+	<div class="Basic-Text-Frame">
+		<div class="Basic-Paragraph para-style-override-1" id='heroImage'>
+			</p>
+		</div>
+	</div>
+	<div id="loginForm" class="container">
+		<br/>
+		<form id="newUserForm" class='loginForm' action="/create_user" method='post'>
+			<input name="user2" placeholder="user" class="customInput" type="text">
+			<br/>
+			<input id='pass' name="pass" placeholder="password2" class="customInput" type="password">
+			<br/>
+			<input id='passCheck' name="passCheck" placeholder="re-enter password" class="customInput" type="password">
+			<br/>
+			<p id="passwordError" style="color:red;">passwords don't match.</p>
+			<br/>
+			<button class="customButton" type="submit"><a>Submit</a></button>
+		</form>
+	</div>
+	<!-- load js -->
+	<script src="javascripts/create_user.js"></script>
+</body>
