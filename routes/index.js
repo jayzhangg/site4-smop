@@ -4,6 +4,7 @@ var http = require('http');
 var qs = require("querystring");
 var crypto = require('crypto');
 var token = '';
+var name = '';
 var apicall = {
 	host: 'localhost:3001/'
 	, port: 3001
@@ -38,7 +39,37 @@ router.get('/options', (req, res) => {
 	res.render('options');
 });
 router.get('/coder_home', (req, res) => {
-	res.render('coder_home');
+	var options = {
+		"method": "GET"
+		, "hostname": "localhost"
+		, "port": "3001"
+		, "path": "/api/get_info"
+		, "headers": {
+			"x-access-token": token
+			, "x-access-name": name
+			, "cache-control": "no-cache"
+		}
+	};
+	var reqInner = http.request(options, function (result) {
+		var chunks = [];
+		result.on("data", function (chunk) {
+			chunks.push(chunk);
+		});
+		result.on("end", function () {
+			var body = JSON.parse(Buffer.concat(chunks).toString());
+			if (body.success) {
+				console.log('request success');
+				res.render('coder_home', {
+					info: body.info
+				});
+			}
+			else {
+				console.log('request for info not completed');
+				res.redirect('/options')
+			}
+		});
+	});
+	reqInner.end();
 });
 router.post('/create_user', (req, res) => {
 	if (req.body.user2 != '' && req.body.pass2 != '' && req.body.passCheck != '') {
@@ -85,6 +116,7 @@ router.post('/create_user', (req, res) => {
 });
 router.post('/login', (req, res) => {
 	if (req.body.user != ('' || null) && req.body.pass != ('' || null)) {
+		name = req.body.user;
 		var options = {
 			"method": "POST"
 			, "hostname": "localhost"
