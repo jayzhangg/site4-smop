@@ -6,17 +6,18 @@
 		</div>
 	</div>
 	<!-- make login html -->
-	<div class='container' id='loginContainer'> <a class="loginButtonFont" href="#" onclick="openLogin()">Login</a> </div>
+	<div class='containerCustom' id='loginContainer'> <a id="loginButton" class="loginButtonFont" onclick="openLogin()" href="#">Login</a> </div>
 	<div id="loginForm" class="container">
 		<br/>
-		<div class="form">
-			<label>User: </label>
-			<input id="user" class="customInput" type="text">
+		<form class="loginForm" action="/login" method="post">
+			<input name="user" placeholder="user" class="customInput" type="text">
 			<br/>
-			<label>Pass: </label>
-			<input id="pass" class="customInput" type="password"> <a class="loginButtonFont-two" href="#" onclick="login()">Login</a> <a href="#">Forgot password?</a> </div>
+			<input name="pass" placeholder="password" class="customInput" type="password">
+			<br/>
+			<button class="customButton" type="submit"><a>Login</a></button>
+			<br/> <a href="#">Forgot password?</a> </div>
 	</div>
-	<div id="logInOut" class="fixme"></div>
+	<br/><a id='newUserButton' class="loginButtonFont" href='new_user' style="font-size:12pt;">New User?</a>
 	<!-- load js -->
 	<script src="javascripts/login.js"></script>
 </body>

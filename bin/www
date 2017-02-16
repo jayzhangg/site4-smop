@@ -36,27 +36,15 @@ function normalizePort(val) {
 	}
 	return false;
 }
-const MongoClient = require('mongodb').MongoClient
-var db
-MongoClient.connect('mongodb://<alexshukhman>:<smop1>@ds145128.mlab.com:45128/smop', (err, database) => {
-		if (err) return console.log(err)
-		db = database
-		app.post('/quotes', (req, res) => {
-			db.collection('quotes').save(req.body, (err, result) => {
-				if (err) return console.log(err)
-				console.log('saved to database')
-				res.redirect('/')
-			})
-		})
-	})
-	/**
-	 * Event listener for HTTP server "error" event.
-	 */
+/**
+ * Event listener for HTTP server "error" event.
+ */
 function onError(error) {
+	var p = port;
 	if (error.syscall !== 'listen') {
 		throw error;
 	}
-	var bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port;
+	var bind = typeof p === 'string' ? 'Pipe ' + p : 'Port ' + p;
 	// handle specific listen errors with friendly messages
 	switch (error.code) {
 	case 'EACCES':
@@ -75,7 +63,8 @@ function onError(error) {
  * Event listener for HTTP server "listening" event.
  */
 function onListening() {
-	var addr = server.address();
+	var s = server;
+	var addr = s.address();
 	var bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;
 	debug('Listening on ' + bind);
 }
