@@ -15,7 +15,7 @@ Welcome to smop.! Below is some info on what I plan on using:
 * jsonwebtoken
 * nodemon
 
-##General Etiquette (applicable on /all/ files
+##General Etiquette (applicable on /all/ files)
 * Use Beautify.io to get the right styling. I use Brackets which has a plugin for it
 
 ##Some Helpful Resources 
