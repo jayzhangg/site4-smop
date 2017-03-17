@@ -9,6 +9,7 @@ editor.$PersistentHScroll = Infinity;
 function editorSubmit() {
 	$('#editorReturn').html('checking...');
 	var eval = editor.getValue();
+	console.log('eval: ' + eval);
 	$.post('/get_info', eval, function (result) {
 		$('#editorReturn').html(result);
 	});
