@@ -114,6 +114,40 @@ router.post('/create_user', (req, res) => {
 		res.redirect('/');
 	}
 });
+//post codeCheck
+router.post('/post_CodeCheck', (req, res) => {
+	var options = {
+		"method": "POST"
+		, "hostname": "localhost"
+		, "port": "3001"
+		, "path": "/api/post_CodeCheck"
+		, "headers": {
+			"content-type": "application/x-www-form-urlencoded"
+			, "cache-control": "no-cache"
+		}
+	};
+	var reqInner = http.request(options, function (result) {
+		var chunks = [];
+		result.on("data", function (chunk) {
+			chunks.push(chunk);
+		});
+		result.on("end", function () {
+			var body = JSON.parse(Buffer.concat(chunks).toString());
+			if (body.success) {
+				token = body.token;
+				res.redirect('/options');
+			}
+			else {
+				res.redirect('/');
+			}
+		});
+	});
+	reqInner.write(qs.stringify({
+		data: req.body.data
+	}));
+	reqInner.end();
+});
+//login
 router.post('/login', (req, res) => {
 	if (req.body.user != ('' || null) && req.body.pass != ('' || null)) {
 		name = req.body.user;
