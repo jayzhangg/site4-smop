@@ -20,6 +20,6 @@ function editorSubmit() {
 		data: eval
 	}, function (result) {
 		console.log(result)
-		$('#editorReturn').html(result.info);
+		$('#editorReturn').html(result);
 	});
 }
