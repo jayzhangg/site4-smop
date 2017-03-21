@@ -134,16 +134,17 @@ router.post('/post_CodeCheck', (req, res) => {
 		result.on("end", function () {
 			var body = JSON.parse(Buffer.concat(chunks).toString());
 			if (body.success) {
-				token = body.token;
-				res.redirect('/options');
+				res.write(JSON.stringify({
+					info: body.data + '//worked!'
+				}));
 			}
 			else {
-				res.redirect('/');
+				console.log('ajs indexjs check fail');
 			}
 		});
 	});
 	reqInner.write(qs.stringify({
-		data: req.body.data
+		code: req.body.data
 	}));
 	reqInner.end();
 });
