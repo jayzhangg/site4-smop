@@ -51,6 +51,9 @@ router.get('/', function (req, res) {
 			}
 		});
 	});
+	reqInner.write(qs.stringify({
+		token: Cookies.get("token")
+	}));
 	reqInner.end();
 });
 router.get('/new_user', function (req, res) {
@@ -78,6 +81,9 @@ router.get('/options', (req, res) => {
 			}
 		});
 	});
+	reqInner.write(qs.stringify({
+		token: Cookies.get("token")
+	}));
 	reqInner.end();
 });
 router.get('/coder_home', (req, res) => {
@@ -185,6 +191,7 @@ router.post('/post_CodeCheck', (req, res) => {
 	});
 	reqInner.write(qs.stringify({
 		code: req.body.data
+		, token: Cookies.get("token")
 	}));
 	reqInner.end();
 });
@@ -211,9 +218,8 @@ router.post('/login', (req, res) => {
 				var body = JSON.parse(Buffer.concat(chunks).toString());
 				if (body.success) {
 					var token = body.token;
-					new Cookies(req, res).set('access_token', token, {
+					var cookies = new Cookies(req, res).set('token', token, {
 						httpOnly: true
-						, secure: true // for your production environment
 					});
 					res.redirect('/options');
 				}
