@@ -38,6 +38,9 @@ router.get('/new_user', function (req, res) {
 router.get('/options', (req, res) => {
 	res.render('options');
 });
+router.get('/owner_home', (req, res) => {
+	res.render('owner_home');
+});
 router.get('/coder_home', (req, res) => {
 	var options = {
 		"method": "GET"
