@@ -3,7 +3,7 @@ var app = express();
 var http = require('http');
 var qs = require("querystring");
 var crypto = require('crypto');
-var Cookies = require('cookies');
+var token = '';
 var name = '';
 var apicall = {
 	host: 'localhost:3001/'
@@ -27,14 +27,57 @@ app.use(bodyParser.urlencoded({
 	extended: true
 }));
 var router = express.Router();
-const MongoClient = require('mongodb').MongoClient
-	/* GET home page. */
+const MongoClient = require('mongodb').MongoClient;
+//login
+router.post('/login', (req, res) => {
+	if (req.body.user != ('' || null) && req.body.pass != ('' || null)) {
+		name = req.body.user;
+		var options = {
+			"method": "POST"
+			, "hostname": "localhost"
+			, "port": "3001"
+			, "path": "/api/authenticate"
+			, "headers": {
+				"content-type": "application/x-www-form-urlencoded"
+				, "cache-control": "no-cache"
+			}
+		};
+		var reqInner = http.request(options, function (result) {
+			var chunks = [];
+			result.on("data", function (chunk) {
+				chunks.push(chunk);
+			});
+			result.on("end", function () {
+				var body = JSON.parse(Buffer.concat(chunks).toString());
+				if (body.success) {
+					token = body.token;
+					res.redirect('/options');
+				}
+				else {
+					res.redirect('/');
+				}
+			});
+		});
+		reqInner.write(qs.stringify({
+			name: req.body.user
+			, password: req.body.pass
+		}));
+		reqInner.end();
+	}
+	else res.redirect('/');
+});
+/* GET home page. */
 router.get('/', function (req, res) {
 	var options = {
 		'method': 'GET'
 		, 'hostname': 'localhost'
 		, 'port': '3001'
 		, 'path': '/api/checkToken'
+		, "headers": {
+			"x-access-token": token
+			, "x-access-name": name
+			, "cache-control": "no-cache"
+		}
 	}
 	var reqInner = http.request(options, function (result) {
 		var chunks = [];
@@ -51,9 +94,6 @@ router.get('/', function (req, res) {
 			}
 		});
 	});
-	reqInner.write(qs.stringify({
-		token: Cookies.get("token")
-	}));
 	reqInner.end();
 });
 router.get('/new_user', function (req, res) {
@@ -65,6 +105,11 @@ router.get('/options', (req, res) => {
 		, 'hostname': 'localhost'
 		, 'port': '3001'
 		, 'path': '/api/checkToken'
+		, "headers": {
+			"x-access-token": token
+			, "x-access-name": name
+			, "cache-control": "no-cache"
+		}
 	}
 	var reqInner = http.request(options, function (result) {
 		var chunks = [];
@@ -81,9 +126,6 @@ router.get('/options', (req, res) => {
 			}
 		});
 	});
-	reqInner.write(qs.stringify({
-		token: Cookies.get("token")
-	}));
 	reqInner.end();
 });
 router.get('/owner_home', (req, res) => {
@@ -168,15 +210,16 @@ router.post('/create_user', (req, res) => {
 //post codeCheck
 router.post('/post_CodeCheck', (req, res) => {
 	var options = {
-		"method": "POST"
-		, "hostname": "localhost"
-		, "port": "3001"
-		, "path": "/api/post_CodeCheck"
+		'method': 'GET'
+		, 'hostname': 'localhost'
+		, 'port': '3001'
+		, 'path': '/api/checkToken'
 		, "headers": {
-			"content-type": "application/x-www-form-urlencoded"
+			"x-access-token": token
+			, "x-access-name": name
 			, "cache-control": "no-cache"
 		}
-	};
+	}
 	var reqInner = http.request(options, function (result) {
 		var chunks = [];
 		result.on("data", function (chunk) {
@@ -185,59 +228,42 @@ router.post('/post_CodeCheck', (req, res) => {
 		result.on("end", function () {
 			var body = JSON.parse(Buffer.concat(chunks).toString());
 			if (body.success) {
-				res.end('python parse returned no error');
+				var options2 = {
+					"method": "POST"
+					, "hostname": "localhost"
+					, "port": "3001"
+					, "path": "/api/post_CodeCheck"
+					, "headers": {
+						"x-access-token": token
+						, "x-access-name": name
+						, "cache-control": "no-cache"
+					}
+				};
+				var reqInner2 = http.request(options2, function (result) {
+					var chunks = [];
+					result.on("data", function (chunk) {
+						chunks.push(chunk);
+					});
+					result.on("end", function () {
+						var body = JSON.parse(Buffer.concat(chunks).toString());
+						if (body.success) {
+							res.end('python parse returned no error');
+						}
+						else {
+							res.end('python parse returned an error');
+						}
+					});
+				});
+				reqInner2.write(qs.stringify({
+					code: req.body.data
+				}));
 			}
 			else {
-				res.end('python parse returned an error');
+				res.redirect('/');
 			}
 		});
 	});
-	reqInner.write(qs.stringify({
-		code: req.body.data
-		, token: Cookies.get("token")
-	}));
 	reqInner.end();
-});
-//login
-router.post('/login', (req, res) => {
-	if (req.body.user != ('' || null) && req.body.pass != ('' || null)) {
-		name = req.body.user;
-		var options = {
-			"method": "POST"
-			, "hostname": "localhost"
-			, "port": "3001"
-			, "path": "/api/authenticate"
-			, "headers": {
-				"content-type": "application/x-www-form-urlencoded"
-				, "cache-control": "no-cache"
-			}
-		};
-		var reqInner = http.request(options, function (result) {
-			var chunks = [];
-			result.on("data", function (chunk) {
-				chunks.push(chunk);
-			});
-			result.on("end", function () {
-				var body = JSON.parse(Buffer.concat(chunks).toString());
-				if (body.success) {
-					var token = body.token;
-					var cookies = new Cookies(req, res).set('token', token, {
-						httpOnly: true
-					});
-					res.redirect('/options');
-				}
-				else {
-					res.redirect('/');
-				}
-			});
-		});
-		reqInner.write(qs.stringify({
-			name: req.body.user
-			, password: req.body.pass
-		}));
-		reqInner.end();
-	}
-	else res.redirect('/');
 });
 //The 404 Route (ALWAYS Keep this as the last route)
 router.get('*', function (req, res) {
