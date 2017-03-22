@@ -86,6 +86,9 @@ router.get('/options', (req, res) => {
 	}));
 	reqInner.end();
 });
+router.get('/owner_home', (req, res) => {
+	res.render('owner_home');
+});
 router.get('/coder_home', (req, res) => {
 	var options = {
 		"method": "GET"
