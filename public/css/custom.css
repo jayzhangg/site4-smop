@@ -158,19 +158,23 @@ ACE.js stuff
 */
 
 #editor {
-	position: absolute;
+	position: relative;
 	top: 0;
 	right: 0;
 	left: 0;
 	bottom: 0;
+	height: inherit;
 	border: 1px solid #f0f0f0;
 }
 
 #editorReturn {
+	position: relative;
 	font-family: Courier New, Courier, Lucida Sans Typewriter, Lucida Typewriter, monospace;
 	color: #303030;
 	text-decoration: none;
 	font-weight: bolder;
+	width: 50vw;
+	left: 3vw;
 }
 
 

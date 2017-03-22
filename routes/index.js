@@ -3,7 +3,7 @@ var app = express();
 var http = require('http');
 var qs = require("querystring");
 var crypto = require('crypto');
-var token = '';
+var Cookies = require('cookies');
 var name = '';
 var apicall = {
 	host: 'localhost:3001/'
@@ -30,13 +30,55 @@ var router = express.Router();
 const MongoClient = require('mongodb').MongoClient
 	/* GET home page. */
 router.get('/', function (req, res) {
-	res.render('index');
+	var options = {
+		'method': 'GET'
+		, 'hostname': 'localhost'
+		, 'port': '3001'
+		, 'path': '/api/checkToken'
+	}
+	var reqInner = http.request(options, function (result) {
+		var chunks = [];
+		result.on("data", function (chunk) {
+			chunks.push(chunk);
+		});
+		result.on("end", function () {
+			var body = JSON.parse(Buffer.concat(chunks).toString());
+			if (body.success) {
+				res.redirect('options');
+			}
+			else {
+				res.render('index');
+			}
+		});
+	});
+	reqInner.end();
 });
 router.get('/new_user', function (req, res) {
 	res.render('new_user');
 });
 router.get('/options', (req, res) => {
-	res.render('options');
+	var options = {
+		'method': 'GET'
+		, 'hostname': 'localhost'
+		, 'port': '3001'
+		, 'path': '/api/checkToken'
+	}
+	var reqInner = http.request(options, function (result) {
+		var chunks = [];
+		result.on("data", function (chunk) {
+			chunks.push(chunk);
+		});
+		result.on("end", function () {
+			var body = JSON.parse(Buffer.concat(chunks).toString());
+			if (body.success) {
+				res.render('options');
+			}
+			else {
+				res.redirect('/');
+			}
+		});
+	});
+	reqInner.end();
 });
 router.get('/owner_home', (req, res) => {
 	res.render('owner_home');
@@ -67,8 +109,8 @@ router.get('/coder_home', (req, res) => {
 				});
 			}
 			else {
-				console.log('request for info not completed');
-				res.redirect('/options')
+				console.log(body.message);
+				res.redirect('/')
 			}
 		});
 	});
@@ -137,16 +179,15 @@ router.post('/post_CodeCheck', (req, res) => {
 		result.on("end", function () {
 			var body = JSON.parse(Buffer.concat(chunks).toString());
 			if (body.success) {
-				token = body.token;
-				res.redirect('/options');
+				res.end('python parse returned no error');
 			}
 			else {
-				res.redirect('/');
+				res.end('python parse returned an error');
 			}
 		});
 	});
 	reqInner.write(qs.stringify({
-		data: req.body.data
+		code: req.body.data
 	}));
 	reqInner.end();
 });
@@ -172,7 +213,11 @@ router.post('/login', (req, res) => {
 			result.on("end", function () {
 				var body = JSON.parse(Buffer.concat(chunks).toString());
 				if (body.success) {
-					token = body.token;
+					var token = body.token;
+					new Cookies(req, res).set('access_token', token, {
+						httpOnly: true
+						, secure: true // for your production environment
+					});
 					res.redirect('/options');
 				}
 				else {
