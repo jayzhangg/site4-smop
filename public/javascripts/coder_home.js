@@ -18,8 +18,7 @@ function editorSubmit() {
 	// post data to index then api
 	$.post('/post_CodeCheck', {
 		data: eval
-	}, function (result) {
-		console.log(result)
+	}).done(function (result) {
 		$('#editorReturn').html(result);
 	});
 }

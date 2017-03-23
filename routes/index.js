@@ -1,4 +1,5 @@
 var express = require('express');
+const bodyParser = require('body-parser');
 var app = express();
 var http = require('http');
 var qs = require("querystring");
@@ -21,7 +22,6 @@ var sha512 = function (password, salt) {
 		, passwordHash: value
 	};
 }
-const bodyParser = require('body-parser');
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({
 	extended: true
@@ -212,6 +212,7 @@ router.post('/create_user', (req, res) => {
 });
 //post codeCheck
 router.post('/post_CodeCheck', (req, res) => {
+	console.log(req.data);
 	var options = {
 		'method': 'GET'
 		, 'hostname': 'localhost'
