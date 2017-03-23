@@ -68,6 +68,7 @@ router.post('/login', (req, res) => {
 });
 /* GET home page. */
 router.get('/', function (req, res) {
+	// check if token expired
 	var options = {
 		'method': 'GET'
 		, 'hostname': 'localhost'
@@ -100,6 +101,7 @@ router.get('/new_user', function (req, res) {
 	res.render('new_user');
 });
 router.get('/options', (req, res) => {
+	// check if token expired
 	var options = {
 		'method': 'GET'
 		, 'hostname': 'localhost'
@@ -132,6 +134,7 @@ router.get('/owner_home', (req, res) => {
 	res.render('owner_home');
 });
 router.get('/coder_home', (req, res) => {
+	// get info
 	var options = {
 		"method": "GET"
 		, "hostname": "localhost"
@@ -221,6 +224,7 @@ router.post('/post_CodeCheck', (req, res) => {
 		}
 	}
 	var reqInner = http.request(options, function (result) {
+		//checks if the key expired
 		var chunks = [];
 		result.on("data", function (chunk) {
 			chunks.push(chunk);
@@ -228,6 +232,7 @@ router.post('/post_CodeCheck', (req, res) => {
 		result.on("end", function () {
 			var body = JSON.parse(Buffer.concat(chunks).toString());
 			if (body.success) {
+				// actual codeCheck
 				var options2 = {
 					"method": "POST"
 					, "hostname": "localhost"
