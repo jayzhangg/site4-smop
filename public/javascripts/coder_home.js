@@ -17,7 +17,7 @@ function editorSubmit() {
 	var eval = editor.getValue();
 	// post data to index then api
 	$.post('/post_CodeCheck', {
-		data: eval
+		'data': eval
 	}).done(function (result) {
 		$('#editorReturn').html(result);
 	});
