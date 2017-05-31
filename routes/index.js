@@ -233,17 +233,14 @@ router.post('/post_CodeCheck', (req, res) => {
 		result.on("end", function () {
 			var body = JSON.parse(Buffer.concat(chunks).toString());
 			if (body.success) {
+				console.log(body);
 				// actual codeCheck
+				reqInner.end();
 				var options2 = {
 					"method": "POST"
 					, "hostname": "localhost"
 					, "port": "3001"
 					, "path": "/api/post_CodeCheck"
-					, "headers": {
-						"x-access-token": token
-						, "x-access-name": name
-						, "cache-control": "no-cache"
-					}
 				};
 				var reqInner2 = http.request(options2, function (result) {
 					var chunks = [];
@@ -256,7 +253,7 @@ router.post('/post_CodeCheck', (req, res) => {
 							res.end('python parse returned no error');
 						}
 						else {
-							res.end('python parse returned an error');
+							res.end('python parse returned an error, body: ' + body.toString);
 						}
 					});
 				});
