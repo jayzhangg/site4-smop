@@ -212,7 +212,7 @@ router.post('/create_user', (req, res) => {
 });
 //post codeCheck
 router.post('/post_CodeCheck', (req, res) => {
-	console.log(req.data);
+	console.log('AJS REQ DATA:' + req.body.data);
 	var options = {
 		'method': 'GET'
 		, 'hostname': 'localhost'
@@ -233,14 +233,17 @@ router.post('/post_CodeCheck', (req, res) => {
 		result.on("end", function () {
 			var body = JSON.parse(Buffer.concat(chunks).toString());
 			if (body.success) {
-				console.log(body);
-				// actual codeCheck
 				reqInner.end();
+				// actual codeCheck
 				var options2 = {
 					"method": "POST"
 					, "hostname": "localhost"
 					, "port": "3001"
-					, "path": "/api/post_CodeCheck"
+					, "path": "/api/post_codeCheck"
+					, 'headers': {
+						"x-access-token": token
+						, "content-type": "application/x-www-form-urlencoded"
+					}
 				};
 				var reqInner2 = http.request(options2, function (result) {
 					var chunks = [];
@@ -253,13 +256,15 @@ router.post('/post_CodeCheck', (req, res) => {
 							res.end('python parse returned no error');
 						}
 						else {
-							res.end('python parse returned an error, body: ' + body.toString);
+							res.end('python parse returned an error, body: ' + body.toString());
 						}
 					});
 				});
+				console.log('AJS REQ DATA:' + req.body.data);
 				reqInner2.write(qs.stringify({
 					code: req.body.data
 				}));
+				reqInner2.end();
 			}
 			else {
 				res.redirect('/');
