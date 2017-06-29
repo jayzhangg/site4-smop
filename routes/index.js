@@ -154,7 +154,6 @@ router.get('/coder_home', (req, res) => {
 		result.on("end", function () {
 			var body = JSON.parse(Buffer.concat(chunks).toString());
 			if (body.success) {
-				console.log('request success');
 				res.render('coder_home', {
 					info: body.info
 				});
@@ -212,7 +211,6 @@ router.post('/create_user', (req, res) => {
 });
 //post codeCheck
 router.post('/post_CodeCheck', (req, res) => {
-	console.log('AJS REQ DATA:' + req.body.data);
 	var options = {
 		'method': 'GET'
 		, 'hostname': 'localhost'
@@ -228,6 +226,7 @@ router.post('/post_CodeCheck', (req, res) => {
 		//checks if the key expired
 		var chunks = [];
 		result.on("data", function (chunk) {
+			console.log(chunk.toString());
 			chunks.push(chunk);
 		});
 		result.on("end", function () {
@@ -260,7 +259,6 @@ router.post('/post_CodeCheck', (req, res) => {
 						}
 					});
 				});
-				console.log('AJS REQ DATA:' + req.body.data);
 				reqInner2.write(qs.stringify({
 					code: req.body.data
 				}));
