@@ -131,7 +131,38 @@ router.get('/options', (req, res) => {
 	reqInner.end();
 });
 router.get('/owner_home', (req, res) => {
-	res.render('owner_home');
+	// get info
+	var options = {
+		"method": "GET"
+		, "hostname": "localhost"
+		, "port": "3001"
+		, "path": "/api/get_info"
+		, "headers": {
+			"x-access-token": token
+			, "x-access-name": name
+			, "cache-control": "no-cache"
+			, "coder_owner": "owner"
+		}
+	};
+	var reqInner = http.request(options, function (result) {
+		var chunks = [];
+		result.on("data", function (chunk) {
+			chunks.push(chunk);
+		});
+		result.on("end", function () {
+			var body = JSON.parse(Buffer.concat(chunks).toString());
+			if (body.success) {
+				res.render('owner_home', {
+					info: body.info
+				});
+			}
+			else {
+				console.log(body.message);
+				res.redirect('/')
+			}
+		});
+	});
+	reqInner.end();
 });
 router.get('/coder_home', (req, res) => {
 	// get info
@@ -144,6 +175,7 @@ router.get('/coder_home', (req, res) => {
 			"x-access-token": token
 			, "x-access-name": name
 			, "cache-control": "no-cache"
+			, "coder_owner": "coder"
 		}
 	};
 	var reqInner = http.request(options, function (result) {
@@ -251,11 +283,11 @@ router.post('/post_CodeCheck', (req, res) => {
 					});
 					result.on("end", function () {
 						var body = JSON.parse(Buffer.concat(chunks).toString());
-						if (body.success) {
+						if (body.pySuccess) {
 							res.end('python parse returned no error');
 						}
 						else {
-							res.end('python parse returned an error, body: ' + body.toString());
+							res.end('python parse returned an error, body: ' + JSON.stringify(body));
 						}
 					});
 				});
