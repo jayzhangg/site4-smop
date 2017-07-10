@@ -19,6 +19,13 @@ body {
 	margin-left: auto;
 }
 
+h1 {
+	font-family: 'Inconsolata', monospace;
+	font-size: 16pt;
+	color: #a0a0a0;
+	font-style: italic;
+}
+
 a {
 	font-family: Courier New, Courier, Lucida Sans Typewriter, Lucida Typewriter, monospace;
 	color: #808070;
@@ -63,7 +70,7 @@ a {
 	border: none;
 	display: block;
 	text-align: center;
-	margin: 10px auto;
+	margin: 6px auto;
 }
 
 .cbalt {
@@ -177,6 +184,11 @@ ACE.js stuff
 	left: 3vw;
 }
 
+.submitButton {
+	margin: 2vh;
+	float: right;
+}
+
 
 /**********
 Resizable JQuery stuff
@@ -186,4 +198,20 @@ Resizable JQuery stuff
 	width: 50vw;
 	height: 50vh;
 	left: 3vw;
+}
+
+
+/**********
+Coder/Owner Home
+*/
+
+.feed {
+	width: 40vw;
+	text-align: right;
+	margin-right: 7vw;
+	float: right;
+}
+
+.customchoice {
+	margin: 25vh 0 0 0;
 }
