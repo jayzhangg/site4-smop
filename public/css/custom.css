@@ -20,10 +20,7 @@ body {
 }
 
 h1 {
-	font-family: 'Inconsolata', monospace;
 	font-size: 16pt;
-	color: #a0a0a0;
-	font-style: italic;
 }
 
 a {
@@ -148,6 +145,14 @@ option.html
 	text-align: center;
 }
 
+.codercolorlight {
+	color: #6090b0;
+}
+
+.ownercolorlight {
+	color: #60a060;
+}
+
 .choicetext {
 	font-size: 15vmin;
 	font-weight: lighter;
@@ -214,4 +219,18 @@ Coder/Owner Home
 
 .customchoice {
 	margin: 25vh 0 0 0;
+}
+
+.feedheader {
+	font-family: 'Inconsolata', monospace;
+	font-style: italic;
+	color: #a0a0a0;
+}
+
+.codercolor {
+	color: #203555;
+}
+
+.ownercolor {
+	color: #205020;
 }
