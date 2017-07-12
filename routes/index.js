@@ -303,6 +303,72 @@ router.post('/post_CodeCheck', (req, res) => {
 	});
 	reqInner.end();
 });
+router.get('/get_codertaskfeed', (req, res) => {
+	var options = {
+		"method": "GET"
+		, "hostname": "localhost"
+		, "port": "3001"
+		, "path": "/api/get_feed"
+		, "headers": {
+			"x-access-token": token
+			, "x-access-name": name
+			, "cache-control": "no-cache"
+			, "coder_owner": "coder"
+		}
+	}
+	var reqInner = http.request(options, function (result) {
+		var chunks = [];
+		result.on("data", function (chunk) {
+			chunks.push(chunk);
+		});
+		result.on("end", function () {
+			var body = JSON.parse(Buffer.concat(chunks).toString());
+			if (body.success == true) {
+				res.json({
+					message: body.result
+				});
+			}
+			else {
+				console.log(body.message);
+				res.redirect('/')
+			}
+		});
+	});
+	reqInner.end();
+});
+router.get('/get_ownertaskfeed', (req, res) => {
+	var options = {
+		"method": "GET"
+		, "hostname": "localhost"
+		, "port": "3001"
+		, "path": "/api/get_feed"
+		, "headers": {
+			"x-access-token": token
+			, "x-access-name": name
+			, "cache-control": "no-cache"
+			, "coder_owner": "owner"
+		}
+	}
+	var reqInner = http.request(options, function (result) {
+		var chunks = [];
+		result.on("data", function (chunk) {
+			chunks.push(chunk);
+		});
+		result.on("end", function () {
+			var body = JSON.parse(Buffer.concat(chunks).toString());
+			if (body.success == true) {
+				res.json({
+					message: body.result
+				});
+			}
+			else {
+				console.log(body.message);
+				res.redirect('/')
+			}
+		});
+	});
+	reqInner.end();
+});
 //The 404 Route (ALWAYS Keep this as the last route)
 router.get('*', function (req, res) {
 	res.status(404).send("welp, that's a 404.");

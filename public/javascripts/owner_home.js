@@ -1,12 +1,3 @@
-/*
-
-
-
-WHY ARE YOU DIVING SO DEEP INTO MY CODE??
-
-
-
-*/
 // Input the data from the database to the ace.js editor and hide readable text
 (function () {
 	$("#editor").html(info);
@@ -29,7 +20,7 @@ function editorSubmit() {
 // render the task feed
 $(document).ready(function () {
 	$.ajax({
-		url: "get_codertaskfeed"
+		url: "get_ownertaskfeed"
 		, complete: function (data) {
 			$('#feed').html(data.responseJSON.message);
 		}
