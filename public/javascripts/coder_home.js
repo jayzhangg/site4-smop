@@ -15,12 +15,10 @@ WHY ARE YOU DIVING SO DEEP INTO MY CODE??
 function editorSubmit() {
 	$("#editorReturn").html('checking...');
 	var eval = editor.getValue();
-	console.log(eval);
 	// post data to index then api
 	$.post('/post_CodeCheck', {
 		'data': eval
 	}).done(function (result) {
-		console.log("result = " + result);
 		if (typeof result === 'string' || result instanceof String) {
 			$('#editorReturn').html(result);
 		}
@@ -31,7 +29,20 @@ $(document).ready(function () {
 	$.ajax({
 		url: "get_codertaskfeed"
 		, complete: function (data) {
-			$('#feed').html(data.responseJSON.message);
+			var s = '';
+			var m = data.responseJSON.message;
+			console.log('message type:' + typeof m);
+			if (typeof m != 'string') {
+				for (var key in m) {
+					if (m.hasOwnProperty(key)) {
+						s += "<div class='feedtask'>" + JSON.stringify(m[key]) + "</div>";
+					}
+				}
+			}
+			else {
+				s += "<div class='feedmessage'>" + m + "</div>";
+			}
+			$('#feed').html(s);
 		}
 	});
 });

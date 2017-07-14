@@ -369,6 +369,48 @@ router.get('/get_ownertaskfeed', (req, res) => {
 	});
 	reqInner.end();
 });
+router.post('/post_newtask', (req, res) => {
+	var options = {
+		"method": "POST"
+		, "hostname": "localhost"
+		, "port": "3001"
+		, "path": "/api/post_newtask"
+		, "headers": {
+			"x-access-token": token
+			, "x-access-name": name
+			, "content-type": "application/x-www-form-urlencoded"
+			, "cache-control": "no-cache"
+		}
+	};
+	var reqInner = http.request(options, function (result) {
+		var chunks = [];
+		result.on("data", function (chunk) {
+			chunks.push(chunk);
+		});
+		result.on("end", function () {
+			var body = JSON.parse(Buffer.concat(chunks).toString());
+			if (body.success) {
+				res.json({
+					success: true
+				});
+			}
+			else {
+				res.json({
+					success: false
+					, error: body
+				});
+			}
+		});
+	});
+	reqInner.write(qs.stringify({
+		name: req.body.name
+		, lang: req.body.lang
+		, task_message: req.body.task_message
+		, task_pet_code: req.body.task_pet_code
+		, bounty: req.body.bounty
+	}));
+	reqInner.end();
+});
 //The 404 Route (ALWAYS Keep this as the last route)
 router.get('*', function (req, res) {
 	res.status(404).send("welp, that's a 404.");

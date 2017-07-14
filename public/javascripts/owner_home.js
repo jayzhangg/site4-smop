@@ -22,7 +22,20 @@ $(document).ready(function () {
 	$.ajax({
 		url: "get_ownertaskfeed"
 		, complete: function (data) {
-			$('#feed').html(data.responseJSON.message);
+			var s = '';
+			var m = data.responseJSON.message;
+			console.log('message type:' + typeof m);
+			if (typeof m != 'string') {
+				for (var key in m) {
+					if (m.hasOwnProperty(key)) {
+						JSON.stringify(s) += "<div class='feedtask'>" + m[key].toString() + "</div>";
+					}
+				}
+			}
+			else {
+				s += "<div class='feedmessage'>" + m + "</div>";
+			}
+			$('#feed').html(s);
 		}
 	});
 });

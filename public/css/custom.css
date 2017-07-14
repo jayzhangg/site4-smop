@@ -212,6 +212,8 @@ Coder/Owner Home
 
 .feed {
 	width: 40vw;
+	height: 75vh;
+	text-overflow: ellipsis;
 	text-align: right;
 	margin-right: 7vw;
 	float: right;
@@ -233,4 +235,12 @@ Coder/Owner Home
 
 .ownercolor {
 	color: #205020;
+}
+
+.feedtask {
+	color: #f40298;
+}
+
+.feedmessage {
+	color: #a00000;
 }
