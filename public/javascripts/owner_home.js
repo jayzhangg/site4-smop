@@ -24,11 +24,11 @@ $(document).ready(function () {
 		, complete: function (data) {
 			var s = '';
 			var m = data.responseJSON.message;
-			console.log('message type:' + typeof m);
 			if (typeof m != 'string') {
 				for (var key in m) {
+					var innerTask = m[key]['name'] + '($' + m[key]['bounty'] + '): ' + m[key]['task']['message'];
 					if (m.hasOwnProperty(key)) {
-						JSON.stringify(s) += "<div class='feedtask'>" + m[key].toString() + "</div>";
+						s += "<code class='feedtask'>" + innerTask + "</code>";
 					}
 				}
 			}
