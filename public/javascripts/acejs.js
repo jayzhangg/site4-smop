@@ -5,3 +5,5 @@ editor.setShowPrintMargin(false);
 editor.setFadeFoldWidgets(true);
 editor.setHighlightActiveLine(true);
 editor.$PersistentHScroll = Infinity;
+editor.getSession().setUseSoftTabs(true);
+editor.getSession().setUseWrapMode(true);

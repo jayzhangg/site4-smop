@@ -1,11 +1,23 @@
 <body>
 	<div class="choice customchoice">
-		<div id="editorContainer">
-			<div id="resizable">
-				<div id="editor"></div>
-			</div>
-			<div id="editorReturn"> </div>
-			<button id="editorSubmitButton" class="customButton submitButton" type="button" onclick="editorSubmit"><a onclick="editorSubmit()">Save</a></button>
+		<div id="editorContainer container">
+			<form class='taskForm' action="/create_task" method="post">
+				<br/>
+				<input id="name" name="name" placeholder="Task Name" class="customInput" type="text">
+				<br/>
+				<input id="lang" name="lang" placeholder="Language" class="customInput" type="text">
+				<br/>
+				<input id="task_message_short" name="task_message_short" placeholder="Task Summary" class="customInput" type="text">
+				<br/>
+				<input id="task_message_long" name="task_message_long" placeholder="Full Task Message" class="customInput customInput_tall" type="text">
+				<br/>
+				<input id="bounty" name="bounty" placeholder="Bounty (integer only)" class="customInput" type="number">
+				<br/>
+				<input id="task_pet_code" name="task_pet_code" placeholder="Pet Code Goes Here" class="customInput customInput_tall" type="text">
+				<br/>
+				<button class="customButton" type="submit"><a>Save</a></button>
+			</form>
+			<div id="editorReturn"></div>
 		</div>
 		<div id="feed_wrapper" class="feed">
 			<h1 class="feedheader ownercolor">owner home.</h1>

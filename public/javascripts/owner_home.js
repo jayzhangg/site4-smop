@@ -26,9 +26,9 @@ $(document).ready(function () {
 			var m = data.responseJSON.message;
 			if (typeof m != 'string') {
 				for (var key in m) {
-					var innerTask = m[key]['name'] + '($' + m[key]['bounty'] + '): ' + m[key]['task']['message'];
+					var innerTask = m[key]['name'] + '($' + m[key]['bounty'] + '): ' + m[key]['task']['message_short'];
 					if (m.hasOwnProperty(key)) {
-						s += "<code class='feedtask'>" + innerTask + "</code>";
+						s += "<code class='feedtask'>" + innerTask + "</code>" + "<br>";
 					}
 				}
 			}

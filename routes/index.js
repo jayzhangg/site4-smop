@@ -303,6 +303,7 @@ router.post('/post_CodeCheck', (req, res) => {
 	});
 	reqInner.end();
 });
+// get task feeds
 router.get('/get_codertaskfeed', (req, res) => {
 	var options = {
 		"method": "GET"
@@ -314,6 +315,7 @@ router.get('/get_codertaskfeed', (req, res) => {
 			, "x-access-name": name
 			, "cache-control": "no-cache"
 			, "coder_owner": "coder"
+			, "lang": 'js'
 		}
 	}
 	var reqInner = http.request(options, function (result) {
@@ -369,7 +371,8 @@ router.get('/get_ownertaskfeed', (req, res) => {
 	});
 	reqInner.end();
 });
-router.post('/post_newtask', (req, res) => {
+// Owner Create Task
+router.post('/create_task', (req, res) => {
 	var options = {
 		"method": "POST"
 		, "hostname": "localhost"
@@ -405,13 +408,48 @@ router.post('/post_newtask', (req, res) => {
 	reqInner.write(qs.stringify({
 		name: req.body.name
 		, lang: req.body.lang
-		, task_message: req.body.task_message
+		, task_message_short: req.bod.y.task_message_short
+		, task_message_long: req.body.task_message_long
 		, task_pet_code: req.body.task_pet_code
 		, bounty: req.body.bounty
 	}));
 	reqInner.end();
 });
-//The 404 Route (ALWAYS Keep this as the last route)
+// Get Single Task
+router.get('/get_singletask', (req, res) => {
+	var options = {
+		"method": "GET"
+		, "hostname": "localhost"
+		, "port": "3001"
+		, "path": "/api/get_singletask"
+		, "headers": {
+			"x-access-token": token
+			, "x-access-name": name
+			, "cache-control": "no-cache"
+			, "id": req.query.data
+		}
+	}
+	var reqInner = http.request(options, function (result) {
+		var chunks = [];
+		result.on("data", function (chunk) {
+			chunks.push(chunk);
+		});
+		result.on("end", function () {
+			var body = JSON.parse(Buffer.concat(chunks).toString());
+			if (body.success == true) {
+				res.json({
+					message: body.result
+				});
+			}
+			else {
+				console.log(body.message);
+				res.redirect('/')
+			}
+		});
+	});
+	reqInner.end();
+});
+// The 404 Route (ALWAYS Keep this as the last route)
 router.get('*', function (req, res) {
 	res.status(404).send("welp, that's a 404.");
 });
