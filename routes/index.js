@@ -241,7 +241,49 @@ router.post('/create_user', (req, res) => {
 		res.redirect('/');
 	}
 });
-//post codeCheck
+// post editor save
+router.post('/post_EditorSave', (req, res) => {
+	var options = {
+		"method": "POST"
+		, "hostname": "localhost"
+		, "port": "3001"
+		, "path": "/api/post_ResponseSave"
+		, "headers": {
+			"x-access-token": token
+			, "x-access-name": name
+			, "content-type": "application/x-www-form-urlencoded"
+			, "cache-control": "no-cache"
+		}
+	};
+	var reqInner = http.request(options, function (result) {
+		var chunks = [];
+		result.on("data", function (chunk) {
+			chunks.push(chunk);
+		});
+		result.on("end", function () {
+			var body = JSON.parse(Buffer.concat(chunks).toString());
+			if (body.success) {
+				console.log('done');
+				res.json({
+					success: true
+				});
+			}
+			else {
+				console.log('done');
+				res.json({
+					success: false
+					, error: body
+				});
+			}
+		});
+	});
+	reqInner.write(qs.stringify({
+		data: req.body.data
+		, id: req.body.id
+	}));
+	reqInner.end();
+});
+// post codeCheck
 router.post('/post_CodeCheck', (req, res) => {
 	var options = {
 		'method': 'GET'
@@ -293,6 +335,7 @@ router.post('/post_CodeCheck', (req, res) => {
 				});
 				reqInner2.write(qs.stringify({
 					code: req.body.data
+					, id: req.body.id
 				}));
 				reqInner2.end();
 			}
@@ -408,9 +451,10 @@ router.post('/create_task', (req, res) => {
 	reqInner.write(qs.stringify({
 		name: req.body.name
 		, lang: req.body.lang
-		, task_message_short: req.bod.y.task_message_short
+		, task_message_short: req.body.task_message_short
 		, task_message_long: req.body.task_message_long
 		, task_pet_code: req.body.task_pet_code
+		, task_unit_tests: req.body.task_unit_tests
 		, bounty: req.body.bounty
 	}));
 	reqInner.end();
@@ -447,6 +491,89 @@ router.get('/get_singletask', (req, res) => {
 			}
 		});
 	});
+	reqInner.end();
+});
+// Get Task Status
+router.get('/get_taskStatus', (req, res) => {
+	var options = {
+		"method": "GET"
+		, "hostname": "localhost"
+		, "port": "3001"
+		, "path": "/api/get_taskStatus"
+		, "headers": {
+			"x-access-token": token
+			, "x-access-name": name
+			, "cache-control": "no-cache"
+			, "id": req.query.data
+		}
+	}
+	var reqInner = http.request(options, function (result) {
+		var chunks = [];
+		result.on("data", function (chunk) {
+			chunks.push(chunk);
+		});
+		result.on("end", function () {
+			var body = JSON.parse(Buffer.concat(chunks).toString());
+			if (body.success == true) {
+				res.json({
+					message: body.result
+				});
+			}
+			else {
+				console.log('Error getting statuses')
+				console.log(body.message);
+				res.json({
+					message: 'fail'
+				});
+			}
+		});
+	});
+	reqInner.end();
+});
+// Post Update Task
+router.post('/update_task', (req, res) => {
+	var options = {
+		"method": "POST"
+		, "hostname": "localhost"
+		, "port": "3001"
+		, "path": "/api/post_updatetask"
+		, "headers": {
+			"x-access-token": token
+			, "x-access-name": name
+			, "content-type": "application/x-www-form-urlencoded"
+			, "cache-control": "no-cache"
+		}
+	};
+	var reqInner = http.request(options, function (result) {
+		var chunks = [];
+		result.on("data", function (chunk) {
+			chunks.push(chunk);
+		});
+		result.on("end", function () {
+			var body = JSON.parse(Buffer.concat(chunks).toString());
+			if (body.success) {
+				res.json({
+					success: true
+				});
+			}
+			else {
+				res.json({
+					success: false
+					, error: body
+				});
+			}
+		});
+	});
+	reqInner.write(qs.stringify({
+		id: req.body.id
+		, name: req.body.name
+		, lang: req.body.lang
+		, task_message_short: req.body.task_message_short
+		, task_message_long: req.body.task_message_long
+		, task_pet_code: req.body.task_pet_code
+		, task_unit_tests: req.body.task_unit_tests
+		, bounty: req.body.bounty
+	}));
 	reqInner.end();
 });
 // The 404 Route (ALWAYS Keep this as the last route)

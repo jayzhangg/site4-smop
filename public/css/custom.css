@@ -41,18 +41,26 @@ a {
 
 .customInput {
 	background-color: #fafafa !important;
-	width: 200px !important;
 	height: 14pt !important;
+	width: 100%;
+	resize: none;
 	padding-left: 4px !important;
 	border-style: none !important;
 }
 
 .customInput_tall {
-	height: 52pt;
+	height: 52pt !important;
+	word-wrap: break-word;
 }
 
 .customInput:focus {
-	outline-color: #808070;
+	outline-color: #e5e5e5;
+	background-color: #fefefe !important;
+}
+
+.customInput:hover:not(:focus) {
+	background-color: #ffffff !important;
+	outline: #f0f0f0 solid 1px !important;
 }
 
 
@@ -228,7 +236,7 @@ Coder/Owner Home
 }
 
 .customchoice {
-	margin: 25vh 0 0 0;
+	margin: 15vh 0 0 0;
 }
 
 .feedheader {
@@ -256,4 +264,23 @@ Coder/Owner Home
 
 .feedmessage {
 	color: #a00000;
+}
+
+.taskFormContainer {
+	padding-left: 3vw;
+}
+
+.taskDivider {
+	color: #909090;
+	margin: 0;
+}
+
+.notStarted {
+	color: #d0b0b0;
+}
+
+.statusSymbol {
+	margin: 0 1vw 0 0;
+	padding: 0;
+	font-size: 70%;
 }

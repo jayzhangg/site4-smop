@@ -7,22 +7,24 @@ WHY ARE YOU DIVING SO DEEP INTO MY CODE??
 
 
 */
-// Input the data from the database to the ace.js editor and hide readable text
-(function () {
-	$("#editor").html(info);
-})();
 // submitting through frontend js, should be fine
 function editorSubmit() {
-	$("#editorReturn").html('checking...');
-	var eval = editor.getValue();
-	// post data to index then api
-	$.post('/post_CodeCheck', {
-		'data': eval
+	$("#editorReturn").html('saving...');
+	$.post('/post_EditorSave', {
+		'data': editors[0].getValue()
 		, 'id': $('#editor').attr('data-id')
-	}).done(function (result) {
-		if (typeof result === 'string' || result instanceof String) {
-			$('#editorReturn').html(result);
-		}
+	}).done((res) => {
+		if (res.error) throw err;
+		$("#editorReturn").html('checking...');
+		// post data to index then api
+		$.post('/post_CodeCheck', {
+			'data': editors[0].getValue()
+			, 'id': $('#editor').attr('data-id')
+		}).done(function (result) {
+			if (typeof result === 'string' || result instanceof String) {
+				$('#editorReturn').html(result);
+			}
+		});
 	});
 }
 // render the task feed
@@ -56,6 +58,6 @@ function startTask(id) {
 	}).done(function (res) {
 		var m = res.message[0];
 		var s = '/* Task ' + m['name'] + ' was posted by ' + m['owner'] + ' on ' + m['date'] + '. ' + m['name'] + ' has defined the task as such:\n' + m['task']['message_long'] + '\nGood Luck.' + ' */\n' + m['task']['pet_code'];
-		editor.setValue(s);
+		editors[0].setValue(s);
 	});
 }
