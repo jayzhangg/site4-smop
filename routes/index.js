@@ -300,7 +300,6 @@ router.post('/post_CodeCheck', (req, res) => {
 		//checks if the key expired
 		var chunks = [];
 		result.on("data", function (chunk) {
-			console.log(chunk.toString());
 			chunks.push(chunk);
 		});
 		result.on("end", function () {
@@ -315,6 +314,7 @@ router.post('/post_CodeCheck', (req, res) => {
 					, "path": "/api/post_codeCheck"
 					, 'headers': {
 						"x-access-token": token
+						, "x-access-name": name
 						, "content-type": "application/x-www-form-urlencoded"
 					}
 				};
@@ -325,11 +325,11 @@ router.post('/post_CodeCheck', (req, res) => {
 					});
 					result.on("end", function () {
 						var body = JSON.parse(Buffer.concat(chunks).toString());
-						if (body.pySuccess) {
+						if (body.pySuccess == 'true') {
 							res.end('python parse returned no error');
 						}
 						else {
-							res.end('python parse returned an error, body: ' + JSON.stringify(body));
+							res.end('python parse returned an error, error: ' + body.data);
 						}
 					});
 				});
@@ -471,6 +471,7 @@ router.get('/get_singletask', (req, res) => {
 			, "x-access-name": name
 			, "cache-control": "no-cache"
 			, "id": req.query.data
+			, "coder_owner": req.query.coder_owner
 		}
 	}
 	var reqInner = http.request(options, function (result) {
@@ -483,6 +484,7 @@ router.get('/get_singletask', (req, res) => {
 			if (body.success == true) {
 				res.json({
 					message: body.result
+					, mtype: body.mtype
 				});
 			}
 			else {

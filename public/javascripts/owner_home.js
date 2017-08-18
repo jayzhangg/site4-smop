@@ -34,15 +34,18 @@ function editTask(id) {
 	$('#formHeader').attr('data-id', id);
 	$.get("get_singletask", {
 		'data': id
+		, 'coder_owner': 'owner'
 	}).done(function (res) {
 		var m = res.message[0];
-		$('#name').val(m['name']);
-		$('#lang').val(m['lang']);
-		$('#task_message_short').val(m['task']['message_short']);
-		$('#task_message_long').val(m['task']['message_long']);
-		$('#bounty').val(m['bounty']);
-		editors[0].setValue(m['task']['pet_code']);
-		editors[1].setValue(m['task']['unit_tests']);
+		if (res.mtype == 'json') { //mtype
+			$('#name').val(m['name']);
+			$('#lang').val(m['lang']);
+			$('#task_message_short').val(m['task']['message_short']);
+			$('#task_message_long').val(m['task']['message_long']);
+			$('#bounty').val(m['bounty']);
+			editors[0].setValue(m['task']['pet_code']);
+			editors[1].setValue(m['task']['unit_tests']);
+		}
 	});
 }
 // check task status

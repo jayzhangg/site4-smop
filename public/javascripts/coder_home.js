@@ -55,9 +55,15 @@ function startTask(id) {
 	$('#editor').attr('data-id', id);
 	$.get("get_singletask", {
 		'data': id
+		, 'coder_owner': 'coder'
 	}).done(function (res) {
-		var m = res.message[0];
-		var s = '/* Task ' + m['name'] + ' was posted by ' + m['owner'] + ' on ' + m['date'] + '. ' + m['name'] + ' has defined the task as such:\n' + m['task']['message_long'] + '\nGood Luck.' + ' */\n' + m['task']['pet_code'];
+		if (res.mtype == 'json') {
+			var m = res.message[0];
+			var d = new Date(m['updated_at']);
+			d = d.toDateString();
+			var s = '/* Task ' + m['name'] + ' was posted by ' + m['owner'] + ' on ' + d + '. ' + m['name'] + ' has defined the task as such:\n' + m['task']['message_long'] + '\nGood Luck.' + ' */\n' + m['task']['pet_code'];
+		}
+		else var s = res.message;
 		editors[0].setValue(s);
 	});
 }
