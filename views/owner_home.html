@@ -1,0 +1,41 @@
+<body>
+	<div class="choice customchoice">
+		<div id="editorContainer container" class="taskFormContainer">
+			<form class='taskForm' id='formHeader'>
+				<br/>Task Name:
+				<br/>
+				<input id="name" name="name" placeholder="Task Name" class="customInput" type="text">
+				<br/>
+				<br/>Language:
+				<br/>
+				<input id="lang" name="lang" placeholder="Language" class="customInput" type="text">
+				<br/>
+				<br/>Display Message:
+				<br/>
+				<input id="task_message_short" name="task_message_short" placeholder="Task Summary" class="customInput" type="text">
+				<br/>
+				<br/>Longer Task Description:
+				<br/>
+				<textarea id="task_message_long" class="customInput customInput_tall" name="task_message_long" placeholder="Full Task Message" class="customInput customInput_tall" type="text"></textarea>
+				<br/>
+				<br/>Bounty ($):
+				<br/>
+				<input id="bounty" name="bounty" placeholder="Bounty (number only)" class="customInput" type="number" min="0" step=".01">
+				<br/>
+				<br/> Pet Code:
+				<br/>
+				<div class='editor customInput customInput_tall' id='editor' name="task_pet_code"></div>
+				<br/>
+				<br/> Unit Tests:
+				<br/>
+				<div class='editor customInput customInput_tall' id='PARTHEditor' name="task_unit_tests"></div>
+				<br/>
+				<button class="customButton" type="button" onclick="submitForm()"><a>Save</a></button>
+				<br/> </form>
+			<div id="editorReturn"></div>
+		</div>
+		<div id="feed_wrapper" class="feed">
+			<h1 class="feedheader ownercolor">owner home.</h1>
+			<div id="feed"></div>
+		</div>
+	</div>

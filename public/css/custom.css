@@ -19,11 +19,17 @@ body {
 	margin-left: auto;
 }
 
+h1 {
+	font-size: 16pt;
+}
+
 a {
 	font-family: Courier New, Courier, Lucida Sans Typewriter, Lucida Typewriter, monospace;
 	color: #808070;
 	text-decoration: none;
 	font-weight: bolder;
+	cursor: pointer;
+	cursor: hand;
 }
 
 .loginButtonFont {
@@ -35,14 +41,26 @@ a {
 
 .customInput {
 	background-color: #fafafa !important;
-	width: 200px !important;
 	height: 14pt !important;
+	width: 100%;
+	resize: none;
 	padding-left: 4px !important;
 	border-style: none !important;
 }
 
+.customInput_tall {
+	height: 52pt !important;
+	word-wrap: break-word;
+}
+
 .customInput:focus {
-	outline-color: #808070;
+	outline-color: #e5e5e5;
+	background-color: #fefefe !important;
+}
+
+.customInput:hover:not(:focus) {
+	background-color: #ffffff !important;
+	outline: #f0f0f0 solid 1px !important;
 }
 
 
@@ -63,7 +81,7 @@ a {
 	border: none;
 	display: block;
 	text-align: center;
-	margin: 10px auto;
+	margin: 6px auto;
 }
 
 .cbalt {
@@ -141,6 +159,14 @@ option.html
 	text-align: center;
 }
 
+.codercolorlight {
+	color: #6090b0;
+}
+
+.ownercolorlight {
+	color: #60a060;
+}
+
 .choicetext {
 	font-size: 15vmin;
 	font-weight: lighter;
@@ -158,12 +184,28 @@ ACE.js stuff
 */
 
 #editor {
-	position: absolute;
+	position: relative;
 	top: 0;
 	right: 0;
 	left: 0;
 	bottom: 0;
+	height: inherit;
 	border: 1px solid #f0f0f0;
+}
+
+#editorReturn {
+	position: relative;
+	font-family: Courier New, Courier, Lucida Sans Typewriter, Lucida Typewriter, monospace;
+	color: #303030;
+	text-decoration: none;
+	font-weight: bolder;
+	width: 50vw;
+	left: 3vw;
+}
+
+.submitButton {
+	margin: 2vh;
+	float: right;
 }
 
 
@@ -175,4 +217,70 @@ Resizable JQuery stuff
 	width: 50vw;
 	height: 50vh;
 	left: 3vw;
+}
+
+
+/**********
+Coder/Owner Home
+*/
+
+.feed {
+	width: 40vw;
+	height: 75vh;
+	text-overflow: ellipsis;
+	text-align: right;
+	word-wrap: break-word;
+	margin-right: 7vw;
+	float: right;
+	flex: none !important;
+}
+
+.customchoice {
+	margin: 15vh 0 0 0;
+}
+
+.feedheader {
+	font-family: 'Inconsolata', monospace;
+	font-style: italic;
+	color: #a0a0a0;
+}
+
+.codercolor {
+	color: #405575;
+}
+
+.ownercolor {
+	color: #205020;
+}
+
+.feedtask {
+	color: inherit;
+	padding: 0;
+	font-size: inherit;
+	line-height: inherit;
+	background-color: inherit;
+	border: none;
+}
+
+.feedmessage {
+	color: #a00000;
+}
+
+.taskFormContainer {
+	padding-left: 3vw;
+}
+
+.taskDivider {
+	color: #909090;
+	margin: 0;
+}
+
+.notStarted {
+	color: #d0b0b0;
+}
+
+.statusSymbol {
+	margin: 0 1vw 0 0;
+	padding: 0;
+	font-size: 70%;
 }
