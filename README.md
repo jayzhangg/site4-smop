@@ -1,5 +1,5 @@
 # smop. 
-Welcome to smop.! Below is some info on what I plan on using:
+Welcome to smop.! Below is some info on what I am using:
 
 ## Lang/lib:
 * html
@@ -20,6 +20,9 @@ Welcome to smop.! Below is some info on what I plan on using:
 * https://zellwk.com/blog/crud-express-mongodb/
 * https://scotch.io/tutorials/authenticate-a-node-js-api-with-json-web-tokens
 
+## General Etiquette (applicable on *all* files)
+* Use Beautify.io to get the right styling. I use Brackets which has a plugin for it
+
 ## html/Pug Etiquette (aka how to make a page)
 * html and Pug files are located in the views folder
 * html files are included in Jade files
@@ -31,6 +34,7 @@ Welcome to smop.! Below is some info on what I plan on using:
 
 ## JS Etiquette
 * **no javascripts in html documents,** *they belong in .js documents in the /public/javascripts folder and are to be linked via* \<script src="/public/javascripts/mysource.js">\</script>
+
 
 ## API Etiquette 
 * **never call localhost:3001/api/... from outside of api**, make a function in the API to do so
