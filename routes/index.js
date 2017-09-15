@@ -4,8 +4,8 @@ var app = express();
 var http = require('http');
 var qs = require("querystring");
 var crypto = require('crypto');
-var token = '';
-var name = '';
+global.token = '';
+global.name = '';
 var hostname = '18.220.173.197';
 //var hostname = "localhost";
 var port = '';
@@ -50,7 +50,7 @@ router.post('/login', (req, res) => {
 			result.on("end", function () {
 				var body = JSON.parse(Buffer.concat(chunks).toString());
 				if (body.success) {
-					window.token = body.token;
+					token = body.token;
 					res.redirect('/options');
 				}
 				else {
@@ -68,7 +68,7 @@ router.post('/login', (req, res) => {
 });
 router.post('/login_test', (req, res) => {
 	if (req.body.user != ('' || null) && req.body.pass != ('' || null)) {
-		window.name = req.body.user;
+		name = req.body.user;
 		var options = {
 			"method": "POST"
 			, "hostname": hostname
@@ -112,8 +112,8 @@ router.get('/', function (req, res) {
 		, 'port': port
 		, 'path': '/api/checkToken'
 		, "headers": {
-			"x-access-token": window.token
-			, "x-access-name": window.name
+			"x-access-token": token
+			, "x-access-name": name
 			, "cache-control": "no-cache"
 		}
 	}
@@ -151,8 +151,8 @@ router.get('/options', (req, res) => {
 		, 'port': port
 		, 'path': '/api/checkToken'
 		, "headers": {
-			"x-access-token": window.token
-			, "x-access-name": window.name
+			"x-access-token": token
+			, "x-access-name": name
 			, "cache-control": "no-cache"
 		}
 	}
@@ -181,8 +181,8 @@ router.get('/owner_home', (req, res) => {
 		, "port": port
 		, "path": "/api/get_info"
 		, "headers": {
-			"x-access-token": window.token
-			, "x-access-name": window.name
+			"x-access-token": token
+			, "x-access-name": name
 			, "cache-control": "no-cache"
 			, "coder_owner": "owner"
 		}
@@ -215,8 +215,8 @@ router.get('/coder_home', (req, res) => {
 		, "port": port
 		, "path": "/api/get_info"
 		, "headers": {
-			"x-access-token": window.token
-			, "x-access-name": window.name
+			"x-access-token": token
+			, "x-access-name": name
 			, "cache-control": "no-cache"
 			, "coder_owner": "coder"
 		}
@@ -338,8 +338,8 @@ router.post('/post_EditorSave', (req, res) => {
 		, "port": port
 		, "path": "/api/post_ResponseSave"
 		, "headers": {
-			"x-access-token": window.token
-			, "x-access-name": window.name
+			"x-access-token": token
+			, "x-access-name": name
 			, "content-type": "application/x-www-form-urlencoded"
 			, "cache-control": "no-cache"
 		}
@@ -380,8 +380,8 @@ router.post('/post_CodeCheck', (req, res) => {
 		, 'port': port
 		, 'path': '/api/checkToken'
 		, "headers": {
-			"x-access-token": window.token
-			, "x-access-name": window.name
+			"x-access-token": token
+			, "x-access-name": name
 			, "cache-control": "no-cache"
 		}
 	}
@@ -402,8 +402,8 @@ router.post('/post_CodeCheck', (req, res) => {
 					, "port": port
 					, "path": "/api/post_codeCheck"
 					, 'headers': {
-						"x-access-token": window.token
-						, "x-access-name": window.name
+						"x-access-token": token
+						, "x-access-name": name
 						, "content-type": "application/x-www-form-urlencoded"
 					}
 				};
@@ -443,8 +443,8 @@ router.get('/get_codertaskfeed', (req, res) => {
 		, "port": port
 		, "path": "/api/get_feed"
 		, "headers": {
-			"x-access-token": window.token
-			, "x-access-name": window.name
+			"x-access-token": token
+			, "x-access-name": name
 			, "cache-control": "no-cache"
 			, "coder_owner": "coder"
 			, "lang": 'js'
@@ -477,8 +477,8 @@ router.get('/get_ownertaskfeed', (req, res) => {
 		, "port": port
 		, "path": "/api/get_feed"
 		, "headers": {
-			"x-access-token": window.token
-			, "x-access-name": window.name
+			"x-access-token": token
+			, "x-access-name": name
 			, "cache-control": "no-cache"
 			, "coder_owner": "owner"
 		}
@@ -511,8 +511,8 @@ router.post('/create_task', (req, res) => {
 		, "port": port
 		, "path": "/api/post_newtask"
 		, "headers": {
-			"x-access-token": window.token
-			, "x-access-name": window.name
+			"x-access-token": token
+			, "x-access-name": name
 			, "content-type": "application/x-www-form-urlencoded"
 			, "cache-control": "no-cache"
 		}
@@ -556,8 +556,8 @@ router.get('/get_singletask', (req, res) => {
 		, "port": port
 		, "path": "/api/get_singletask"
 		, "headers": {
-			"x-access-token": window.token
-			, "x-access-name": window.name
+			"x-access-token": token
+			, "x-access-name": name
 			, "cache-control": "no-cache"
 			, "id": req.query.data
 			, "coder_owner": req.query.coder_owner
@@ -592,8 +592,8 @@ router.get('/get_taskStatus', (req, res) => {
 		, "port": port
 		, "path": "/api/get_taskStatus"
 		, "headers": {
-			"x-access-token": window.token
-			, "x-access-name": window.name
+			"x-access-token": token
+			, "x-access-name": name
 			, "cache-control": "no-cache"
 			, "id": req.query.data
 		}
@@ -629,8 +629,8 @@ router.post('/update_task', (req, res) => {
 		, "port": port
 		, "path": "/api/post_updatetask"
 		, "headers": {
-			"x-access-token": window.token
-			, "x-access-name": window.name
+			"x-access-token": token
+			, "x-access-name": name
 			, "content-type": "application/x-www-form-urlencoded"
 			, "cache-control": "no-cache"
 		}
