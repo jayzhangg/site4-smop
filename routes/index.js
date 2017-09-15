@@ -1,13 +1,14 @@
 var express = require('express');
 var session = require('express-session');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 var app = express();
 app.use(session({
 	secret: 'XASDASDA'
 	, token: ''
 	, name: ''
 }));
-app.use(express.cookieParser());
+app.use(cookieParser());
 var http = require('http');
 var qs = require("querystring");
 var crypto = require('crypto');
