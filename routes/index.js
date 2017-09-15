@@ -7,6 +7,7 @@ app.use(session({
 	, token: ''
 	, name: ''
 }));
+app.use(express.cookieParser());
 var http = require('http');
 var qs = require("querystring");
 var crypto = require('crypto');
