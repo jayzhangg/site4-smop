@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 var app = express();
 app.use(session({
 	secret: 'XASDASDA'
+	, token: ''
+	, name: ''
 }));
 var http = require('http');
 var qs = require("querystring");
@@ -383,7 +385,7 @@ router.post('/post_EditorSave', (req, res) => {
 });
 // post codeCheck
 router.post('/post_CodeCheck', (req, res) => {
-	ssn = req.session; 
+	ssn = req.session;
 	var options = {
 		'method': 'GET'
 		, 'hostname': hostname
@@ -447,7 +449,7 @@ router.post('/post_CodeCheck', (req, res) => {
 });
 // get task feeds
 router.get('/get_codertaskfeed', (req, res) => {
-	ssn = req.session; 
+	ssn = req.session;
 	var options = {
 		"method": "GET"
 		, "hostname": hostname
@@ -516,7 +518,7 @@ router.get('/get_ownertaskfeed', (req, res) => {
 });
 // Owner Create Task
 router.post('/create_task', (req, res) => {
-	ssn = req.session; 
+	ssn = req.session;
 	var options = {
 		"method": "POST"
 		, "hostname": hostname
@@ -562,7 +564,7 @@ router.post('/create_task', (req, res) => {
 });
 // Get Single Task
 router.get('/get_singletask', (req, res) => {
-	ssn = req.session; 
+	ssn = req.session;
 	var options = {
 		"method": "GET"
 		, "hostname": hostname
@@ -599,7 +601,7 @@ router.get('/get_singletask', (req, res) => {
 });
 // Get Task Status
 router.get('/get_taskStatus', (req, res) => {
-	ssn = req.session; 
+	ssn = req.session;
 	var options = {
 		"method": "GET"
 		, "hostname": hostname
@@ -637,7 +639,7 @@ router.get('/get_taskStatus', (req, res) => {
 });
 // Post Update Task
 router.post('/update_task', (req, res) => {
-	ssn = req.session; 
+	ssn = req.session;
 	var options = {
 		"method": "POST"
 		, "hostname": hostname
