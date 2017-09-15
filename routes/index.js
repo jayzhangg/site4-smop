@@ -4,8 +4,8 @@ var app = express();
 var http = require('http');
 var qs = require("querystring");
 var crypto = require('crypto');
-global.token = '';
-global.name = '';
+token = '';
+name = '';
 var hostname = '18.220.173.197';
 //var hostname = "localhost";
 var port = '';
@@ -31,7 +31,7 @@ const MongoClient = require('mongodb').MongoClient;
 //login
 router.post('/login', (req, res) => {
 	if (req.body.user != ('' || null) && req.body.pass != ('' || null)) {
-		global.name = req.body.user;
+		name = req.body.user;
 		var options = {
 			"method": "POST"
 			, "hostname": hostname
@@ -50,7 +50,7 @@ router.post('/login', (req, res) => {
 			result.on("end", function () {
 				var body = JSON.parse(Buffer.concat(chunks).toString());
 				if (body.success) {
-					global.token = body.token;
+					token = body.token;
 					res.redirect('/options');
 				}
 				else {
