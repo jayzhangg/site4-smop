@@ -10,22 +10,25 @@ WHY ARE YOU DIVING SO DEEP INTO MY CODE??
 // submitting through frontend js, should be fine
 function editorSubmit() {
 	$("#editorReturn").html('saving...');
-	$.post('/post_EditorSave', {
-		'data': editors[0].getValue()
-		, 'id': $('#editor').attr('data-id')
-	}).done((res) => {
-		if (res.error) throw err;
-		$("#editorReturn").html('checking...');
-		// post data to index then api
-		$.post('/post_CodeCheck', {
+	if ($('#editor').attr('data-id')) {
+		$.post('/post_EditorSave', {
 			'data': editors[0].getValue()
 			, 'id': $('#editor').attr('data-id')
-		}).done(function (result) {
-			if (typeof result === 'string' || result instanceof String) {
-				$('#editorReturn').html(result);
-			}
+		}).done((res) => {
+			if (res.error) throw err;
+			$("#editorReturn").html('checking...');
+			// post data to index then api
+			$.post('/post_CodeCheck', {
+				'data': editors[0].getValue()
+				, 'id': $('#editor').attr('data-id')
+			}).done(function (result) {
+				if (typeof result === 'string' || result instanceof String) {
+					$('#editorReturn').html(result);
+				}
+			});
 		});
-	});
+	}
+	else $('#editorReturn').html('nothing to save');
 }
 // render the task feed
 $(document).ready(function () {

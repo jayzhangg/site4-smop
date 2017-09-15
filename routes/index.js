@@ -6,8 +6,10 @@ var qs = require("querystring");
 var crypto = require('crypto');
 var token = '';
 var name = '';
+var hostname = '18.220.173.197';
+//var hostname = "localhost";
 var apicall = {
-	host: 'localhost:3001/'
+	host: hostname
 	, port: 3001
 };
 var genRandomString = function (length) {
@@ -34,7 +36,7 @@ router.post('/login', (req, res) => {
 		name = req.body.user;
 		var options = {
 			"method": "POST"
-			, "hostname": "localhost"
+			, "hostname": hostname
 			, "port": "3001"
 			, "path": "/api/authenticate"
 			, "headers": {
@@ -66,12 +68,49 @@ router.post('/login', (req, res) => {
 	}
 	else res.redirect('/');
 });
+router.post('/login_test', (req, res) => {
+	if (req.body.user != ('' || null) && req.body.pass != ('' || null)) {
+		name = req.body.user;
+		var options = {
+			"method": "POST"
+			, "hostname": hostname
+			, "port": "3001"
+			, "path": "/api/authenticate_test"
+			, "headers": {
+				"content-type": "application/x-www-form-urlencoded"
+				, "cache-control": "no-cache"
+			}
+		};
+		var reqInner = http.request(options, function (result) {
+			var chunks = [];
+			result.on("data", function (chunk) {
+				chunks.push(chunk);
+			});
+			result.on("end", function () {
+				var body = JSON.parse(Buffer.concat(chunks).toString());
+				if (body.success) {
+					token = body.token;
+					res.redirect('/loginpage');
+				}
+				else {
+					res.redirect('/');
+				}
+			});
+		});
+		reqInner.write(qs.stringify({
+			name: req.body.user
+			, password: req.body.pass
+		}));
+		reqInner.end();
+	}
+	else res.redirect('/');
+});
 /* GET home page. */
 router.get('/', function (req, res) {
 	// check if token expired
 	var options = {
 		'method': 'GET'
-		, 'hostname': 'localhost'
+		, 'hostname': hostname
 		, 'port': '3001'
 		, 'path': '/api/checkToken'
 		, "headers": {
@@ -97,6 +136,12 @@ router.get('/', function (req, res) {
 	});
 	reqInner.end();
 });
+router.get('/loginpage', function (req, res) {
+	res.render('login');
+});
+router.get('/fauxlogin', (req, res) => {
+	res.render('faux_login');
+});
 router.get('/new_user', function (req, res) {
 	res.render('new_user');
 });
@@ -104,7 +149,7 @@ router.get('/options', (req, res) => {
 	// check if token expired
 	var options = {
 		'method': 'GET'
-		, 'hostname': 'localhost'
+		, 'hostname': hostname
 		, 'port': '3001'
 		, 'path': '/api/checkToken'
 		, "headers": {
@@ -134,7 +179,7 @@ router.get('/owner_home', (req, res) => {
 	// get info
 	var options = {
 		"method": "GET"
-		, "hostname": "localhost"
+		, "hostname": hostname
 		, "port": "3001"
 		, "path": "/api/get_info"
 		, "headers": {
@@ -168,7 +213,7 @@ router.get('/coder_home', (req, res) => {
 	// get info
 	var options = {
 		"method": "GET"
-		, "hostname": "localhost"
+		, "hostname": hostname
 		, "port": "3001"
 		, "path": "/api/get_info"
 		, "headers": {
@@ -202,7 +247,7 @@ router.post('/create_user', (req, res) => {
 	if (req.body.user2 != '' && req.body.pass2 != '' && req.body.passCheck != '') {
 		var options = {
 			"method": "POST"
-			, "hostname": "localhost"
+			, "hostname": hostname
 			, "port": "3001"
 			, "path": "/newuser"
 			, "headers": {
@@ -241,11 +286,57 @@ router.post('/create_user', (req, res) => {
 		res.redirect('/');
 	}
 });
+router.post('/create_user_test', (req, res) => {
+	if (true) {
+		var options = {
+			"method": "POST"
+			, "hostname": hostname
+			, "port": "3001"
+			, "path": "/newuser_test"
+			, "headers": {
+				"content-type": "application/x-www-form-urlencoded"
+				, "cache-control": "no-cache"
+			}
+		};
+		var reqInner = http.request(options, function (result) {
+			var chunks = [];
+			result.on("data", function (chunk) {
+				chunks.push(chunk);
+			});
+			result.on("end", function () {
+				var body = JSON.parse(Buffer.concat(chunks).toString());
+				if (body.success) {
+					console.log('worked!')
+					res.json({
+						success: true
+					});
+				}
+				else {
+					res.json({
+						success: false
+					});
+				}
+			});
+		});
+		var salt = genRandomString(16); // salt length of 16
+		var data = sha512(req.body.pass, salt);
+		reqInner.write(qs.stringify({
+			name: req.body.user
+			, password: data.passwordHash
+			, salt: data.salt
+		}));
+		reqInner.end();
+	}
+	else {
+		console.log('if not true');
+		res.redirect('/');
+	}
+});
 // post editor save
 router.post('/post_EditorSave', (req, res) => {
 	var options = {
 		"method": "POST"
-		, "hostname": "localhost"
+		, "hostname": hostname
 		, "port": "3001"
 		, "path": "/api/post_ResponseSave"
 		, "headers": {
@@ -287,7 +378,7 @@ router.post('/post_EditorSave', (req, res) => {
 router.post('/post_CodeCheck', (req, res) => {
 	var options = {
 		'method': 'GET'
-		, 'hostname': 'localhost'
+		, 'hostname': hostname
 		, 'port': '3001'
 		, 'path': '/api/checkToken'
 		, "headers": {
@@ -309,7 +400,7 @@ router.post('/post_CodeCheck', (req, res) => {
 				// actual codeCheck
 				var options2 = {
 					"method": "POST"
-					, "hostname": "localhost"
+					, "hostname": hostname
 					, "port": "3001"
 					, "path": "/api/post_codeCheck"
 					, 'headers': {
@@ -350,7 +441,7 @@ router.post('/post_CodeCheck', (req, res) => {
 router.get('/get_codertaskfeed', (req, res) => {
 	var options = {
 		"method": "GET"
-		, "hostname": "localhost"
+		, "hostname": hostname
 		, "port": "3001"
 		, "path": "/api/get_feed"
 		, "headers": {
@@ -384,7 +475,7 @@ router.get('/get_codertaskfeed', (req, res) => {
 router.get('/get_ownertaskfeed', (req, res) => {
 	var options = {
 		"method": "GET"
-		, "hostname": "localhost"
+		, "hostname": hostname
 		, "port": "3001"
 		, "path": "/api/get_feed"
 		, "headers": {
@@ -418,7 +509,7 @@ router.get('/get_ownertaskfeed', (req, res) => {
 router.post('/create_task', (req, res) => {
 	var options = {
 		"method": "POST"
-		, "hostname": "localhost"
+		, "hostname": hostname
 		, "port": "3001"
 		, "path": "/api/post_newtask"
 		, "headers": {
@@ -463,7 +554,7 @@ router.post('/create_task', (req, res) => {
 router.get('/get_singletask', (req, res) => {
 	var options = {
 		"method": "GET"
-		, "hostname": "localhost"
+		, "hostname": hostname
 		, "port": "3001"
 		, "path": "/api/get_singletask"
 		, "headers": {
@@ -499,7 +590,7 @@ router.get('/get_singletask', (req, res) => {
 router.get('/get_taskStatus', (req, res) => {
 	var options = {
 		"method": "GET"
-		, "hostname": "localhost"
+		, "hostname": hostname
 		, "port": "3001"
 		, "path": "/api/get_taskStatus"
 		, "headers": {
@@ -536,7 +627,7 @@ router.get('/get_taskStatus', (req, res) => {
 router.post('/update_task', (req, res) => {
 	var options = {
 		"method": "POST"
-		, "hostname": "localhost"
+		, "hostname": hostname
 		, "port": "3001"
 		, "path": "/api/post_updatetask"
 		, "headers": {
