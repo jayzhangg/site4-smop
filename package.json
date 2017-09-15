@@ -7,7 +7,7 @@
 		"test": "echo \"Error: no test specified\" && exit 1"
 		, "start": "node ./bin/www"
 		, "dev": "nodemon ./bin/www"
-		, "forever": "forever -w -m5 -t start"
+		, "forever": "forever -w -m5 -t node ./bin/www"
 		, "kill": "forever stop"
 	}
 	, "repository": {
