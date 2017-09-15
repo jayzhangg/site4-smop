@@ -116,33 +116,35 @@ router.get('/', function (req, res) {
 	var ssn = req.session;
 	console.log(req.session);
 	if (!ssn) res.render('index');
-	var options = {
-		'method': 'GET'
-		, 'hostname': hostname
-		, 'port': port
-		, 'path': '/api/checkToken'
-		, "headers": {
-			"x-access-token": ssn.token
-			, "x-access-name": ssn.name
-			, "cache-control": "no-cache"
+	else {
+		var options = {
+			'method': 'GET'
+			, 'hostname': hostname
+			, 'port': port
+			, 'path': '/api/checkToken'
+			, "headers": {
+				"x-access-token": ssn.token
+				, "x-access-name": ssn.name
+				, "cache-control": "no-cache"
+			}
 		}
+		var reqInner = http.request(options, function (result) {
+			var chunks = [];
+			result.on("data", function (chunk) {
+				chunks.push(chunk);
+			});
+			result.on("end", function () {
+				var body = JSON.parse(Buffer.concat(chunks).toString());
+				if (body.success) {
+					res.redirect('options');
+				}
+				else {
+					res.render('index');
+				}
+			});
+		});
+		reqInner.end();
 	}
-	var reqInner = http.request(options, function (result) {
-		var chunks = [];
-		result.on("data", function (chunk) {
-			chunks.push(chunk);
-		});
-		result.on("end", function () {
-			var body = JSON.parse(Buffer.concat(chunks).toString());
-			if (body.success) {
-				res.redirect('options');
-			}
-			else {
-				res.render('index');
-			}
-		});
-	});
-	reqInner.end();
 });
 router.get('/loginpage', function (req, res) {
 	res.render('login');
