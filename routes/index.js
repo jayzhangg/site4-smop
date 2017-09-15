@@ -35,6 +35,7 @@ const MongoClient = require('mongodb').MongoClient;
 //login
 router.post('/login', (req, res) => {
 	var ssn = req.session;
+	if (!ssn.token) res.redirect('/');
 	if (req.body.user != ('' || null) && req.body.pass != ('' || null)) {
 		ssn.name = req.body.user;
 		var options = {
@@ -111,7 +112,8 @@ router.post('/login_test', (req, res) => {
 /* GET home page. */
 router.get('/', function (req, res) {
 	// check if token expired
-	var ssn = req.session;
+	var ssn =req.session;
+	if (!ssn.token) res.redirect('index');
 	var options = {
 		'method': 'GET'
 		, 'hostname': hostname
@@ -152,6 +154,7 @@ router.get('/new_user', function (req, res) {
 router.get('/options', (req, res) => {
 	// check if token expired
 	var ssn = req.session;
+	if (!ssn.token) res.redirect('/');
 	var options = {
 		'method': 'GET'
 		, 'hostname': hostname
@@ -182,7 +185,7 @@ router.get('/options', (req, res) => {
 });
 router.get('/owner_home', (req, res) => {
 	// get info
-	var ssn =req.session;
+	var ssn = req.session;
 	var options = {
 		"method": "GET"
 		, "hostname": hostname
@@ -218,6 +221,7 @@ router.get('/owner_home', (req, res) => {
 router.get('/coder_home', (req, res) => {
 	// get info
 	var ssn = req.session;
+	if (!ssn.token) res.redirect('/');
 	var options = {
 		"method": "GET"
 		, "hostname": hostname
@@ -342,6 +346,7 @@ router.post('/create_user_test', (req, res) => {
 // post editor save
 router.post('/post_EditorSave', (req, res) => {
 	var ssn = req.session;
+	if (!ssn.token) res.redirect('/');
 	var options = {
 		"method": "POST"
 		, "hostname": hostname
@@ -385,6 +390,7 @@ router.post('/post_EditorSave', (req, res) => {
 // post codeCheck
 router.post('/post_CodeCheck', (req, res) => {
 	var ssn = req.session;
+	if (!ssn.token) res.redirect('/');
 	var options = {
 		'method': 'GET'
 		, 'hostname': hostname
@@ -449,6 +455,7 @@ router.post('/post_CodeCheck', (req, res) => {
 // get task feeds
 router.get('/get_codertaskfeed', (req, res) => {
 	var ssn = req.session;
+	if (!ssn.token) res.redirect('/');
 	var options = {
 		"method": "GET"
 		, "hostname": hostname
@@ -518,6 +525,7 @@ router.get('/get_ownertaskfeed', (req, res) => {
 // Owner Create Task
 router.post('/create_task', (req, res) => {
 	var ssn = req.session;
+	if (!ssn.token) res.redirect('/');
 	var options = {
 		"method": "POST"
 		, "hostname": hostname
@@ -564,6 +572,7 @@ router.post('/create_task', (req, res) => {
 // Get Single Task
 router.get('/get_singletask', (req, res) => {
 	var ssn = req.session;
+	if (!ssn.token) res.redirect('/');
 	var options = {
 		"method": "GET"
 		, "hostname": hostname
@@ -601,6 +610,7 @@ router.get('/get_singletask', (req, res) => {
 // Get Task Status
 router.get('/get_taskStatus', (req, res) => {
 	var ssn = req.session;
+	if (!ssn.token) res.redirect('/');
 	var options = {
 		"method": "GET"
 		, "hostname": hostname
@@ -639,6 +649,7 @@ router.get('/get_taskStatus', (req, res) => {
 // Post Update Task
 router.post('/update_task', (req, res) => {
 	var ssn = req.session;
+	if (!ssn.token) res.redirect('/');
 	var options = {
 		"method": "POST"
 		, "hostname": hostname
