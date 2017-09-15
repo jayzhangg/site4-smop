@@ -8,10 +8,8 @@ var token = '';
 var name = '';
 var hostname = '18.220.173.197';
 //var hostname = "localhost";
-var apicall = {
-	host: hostname
-	, port: 3001
-};
+var port = '';
+// var port = '3001'
 var genRandomString = function (length) {
 	return crypto.randomBytes(Math.ceil(length / 2)).toString('hex') /** convert to hexadecimal format */ .slice(0, length); /** return required number of characters */
 };
@@ -37,7 +35,7 @@ router.post('/login', (req, res) => {
 		var options = {
 			"method": "POST"
 			, "hostname": hostname
-			, "port": "3001"
+			, "port": port
 			, "path": "/api/authenticate"
 			, "headers": {
 				"content-type": "application/x-www-form-urlencoded"
@@ -74,7 +72,7 @@ router.post('/login_test', (req, res) => {
 		var options = {
 			"method": "POST"
 			, "hostname": hostname
-			, "port": "3001"
+			, "port": port
 			, "path": "/api/authenticate_test"
 			, "headers": {
 				"content-type": "application/x-www-form-urlencoded"
@@ -111,7 +109,7 @@ router.get('/', function (req, res) {
 	var options = {
 		'method': 'GET'
 		, 'hostname': hostname
-		, 'port': '3001'
+		, 'port': port
 		, 'path': '/api/checkToken'
 		, "headers": {
 			"x-access-token": token
@@ -150,7 +148,7 @@ router.get('/options', (req, res) => {
 	var options = {
 		'method': 'GET'
 		, 'hostname': hostname
-		, 'port': '3001'
+		, 'port': port
 		, 'path': '/api/checkToken'
 		, "headers": {
 			"x-access-token": token
@@ -180,7 +178,7 @@ router.get('/owner_home', (req, res) => {
 	var options = {
 		"method": "GET"
 		, "hostname": hostname
-		, "port": "3001"
+		, "port": port
 		, "path": "/api/get_info"
 		, "headers": {
 			"x-access-token": token
@@ -214,7 +212,7 @@ router.get('/coder_home', (req, res) => {
 	var options = {
 		"method": "GET"
 		, "hostname": hostname
-		, "port": "3001"
+		, "port": port
 		, "path": "/api/get_info"
 		, "headers": {
 			"x-access-token": token
@@ -248,7 +246,7 @@ router.post('/create_user', (req, res) => {
 		var options = {
 			"method": "POST"
 			, "hostname": hostname
-			, "port": "3001"
+			, "port": port
 			, "path": "/newuser"
 			, "headers": {
 				"content-type": "application/x-www-form-urlencoded"
@@ -291,7 +289,7 @@ router.post('/create_user_test', (req, res) => {
 		var options = {
 			"method": "POST"
 			, "hostname": hostname
-			, "port": "3001"
+			, "port": port
 			, "path": "/newuser_test"
 			, "headers": {
 				"content-type": "application/x-www-form-urlencoded"
@@ -337,7 +335,7 @@ router.post('/post_EditorSave', (req, res) => {
 	var options = {
 		"method": "POST"
 		, "hostname": hostname
-		, "port": "3001"
+		, "port": port
 		, "path": "/api/post_ResponseSave"
 		, "headers": {
 			"x-access-token": token
@@ -379,7 +377,7 @@ router.post('/post_CodeCheck', (req, res) => {
 	var options = {
 		'method': 'GET'
 		, 'hostname': hostname
-		, 'port': '3001'
+		, 'port': port
 		, 'path': '/api/checkToken'
 		, "headers": {
 			"x-access-token": token
@@ -401,7 +399,7 @@ router.post('/post_CodeCheck', (req, res) => {
 				var options2 = {
 					"method": "POST"
 					, "hostname": hostname
-					, "port": "3001"
+					, "port": port
 					, "path": "/api/post_codeCheck"
 					, 'headers': {
 						"x-access-token": token
@@ -442,7 +440,7 @@ router.get('/get_codertaskfeed', (req, res) => {
 	var options = {
 		"method": "GET"
 		, "hostname": hostname
-		, "port": "3001"
+		, "port": port
 		, "path": "/api/get_feed"
 		, "headers": {
 			"x-access-token": token
@@ -476,7 +474,7 @@ router.get('/get_ownertaskfeed', (req, res) => {
 	var options = {
 		"method": "GET"
 		, "hostname": hostname
-		, "port": "3001"
+		, "port": port
 		, "path": "/api/get_feed"
 		, "headers": {
 			"x-access-token": token
@@ -510,7 +508,7 @@ router.post('/create_task', (req, res) => {
 	var options = {
 		"method": "POST"
 		, "hostname": hostname
-		, "port": "3001"
+		, "port": port
 		, "path": "/api/post_newtask"
 		, "headers": {
 			"x-access-token": token
@@ -555,7 +553,7 @@ router.get('/get_singletask', (req, res) => {
 	var options = {
 		"method": "GET"
 		, "hostname": hostname
-		, "port": "3001"
+		, "port": port
 		, "path": "/api/get_singletask"
 		, "headers": {
 			"x-access-token": token
@@ -591,7 +589,7 @@ router.get('/get_taskStatus', (req, res) => {
 	var options = {
 		"method": "GET"
 		, "hostname": hostname
-		, "port": "3001"
+		, "port": port
 		, "path": "/api/get_taskStatus"
 		, "headers": {
 			"x-access-token": token
@@ -628,7 +626,7 @@ router.post('/update_task', (req, res) => {
 	var options = {
 		"method": "POST"
 		, "hostname": hostname
-		, "port": "3001"
+		, "port": port
 		, "path": "/api/post_updatetask"
 		, "headers": {
 			"x-access-token": token
