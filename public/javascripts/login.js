@@ -20,6 +20,10 @@ function getHour() {
 		return 'time error... wut.'
 	}
 }
+// Send my email on forgot password
+function forgotPassword() {
+	$('#email').html('please email me at alex.jacob.shukhman@gmail.com')
+}
 // Pre Load Function
 (function () {
 	$('#heroImage').html('Good ' + getHour() + '.');
