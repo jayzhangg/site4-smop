@@ -31,7 +31,7 @@ const MongoClient = require('mongodb').MongoClient;
 //login
 router.post('/login', (req, res) => {
 	if (req.body.user != ('' || null) && req.body.pass != ('' || null)) {
-		name = req.body.user;
+		global.name = req.body.user;
 		var options = {
 			"method": "POST"
 			, "hostname": hostname
@@ -50,7 +50,7 @@ router.post('/login', (req, res) => {
 			result.on("end", function () {
 				var body = JSON.parse(Buffer.concat(chunks).toString());
 				if (body.success) {
-					token = body.token;
+					global.token = body.token;
 					res.redirect('/options');
 				}
 				else {
