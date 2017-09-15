@@ -73,8 +73,9 @@ router.post('/login', (req, res) => {
 	else res.redirect('/');
 });
 router.post('/login_test', (req, res) => {
+	var ssn = req.session;
 	if (req.body.user != ('' || null) && req.body.pass != ('' || null)) {
-		name = req.body.user;
+		ssn.name = req.body.user;
 		var options = {
 			"method": "POST"
 			, "hostname": hostname
@@ -93,7 +94,7 @@ router.post('/login_test', (req, res) => {
 			result.on("end", function () {
 				var body = JSON.parse(Buffer.concat(chunks).toString());
 				if (body.success) {
-					token = body.token;
+					ssn.token = body.token;
 					res.redirect('/loginpage');
 				}
 				else {
@@ -114,7 +115,7 @@ router.get('/', function (req, res) {
 	// check if token expired
 	var ssn = req.session;
 	console.log(req.session);
-	if (!ssn) res.redirect('index');
+	if (!ssn) res.render('index');
 	var options = {
 		'method': 'GET'
 		, 'hostname': hostname
