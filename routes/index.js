@@ -32,6 +32,9 @@ app.use(bodyParser.urlencoded({
 }));
 var router = express.Router();
 const MongoClient = require('mongodb').MongoClient;
+router.get('/index', (req, res) => {
+	res.render('index');
+});
 //login
 router.post('/login', (req, res) => {
 	var ssn = req.session;
@@ -115,7 +118,7 @@ router.get('/', function (req, res) {
 	// check if token expired
 	var ssn = req.session;
 	console.log(req.session);
-	if (!ssn) res.render('index');
+	if (!ssn) res.redirect('/index');
 	else {
 		var options = {
 			'method': 'GET'
