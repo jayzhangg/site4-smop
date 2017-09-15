@@ -113,7 +113,7 @@ router.post('/login_test', (req, res) => {
 router.get('/', function (req, res) {
 	// check if token expired
 	var ssn = req.session;
-	console.log(ssn);
+	console.log(req.session);
 	if (!ssn.token) res.redirect('index');
 	var options = {
 		'method': 'GET'
