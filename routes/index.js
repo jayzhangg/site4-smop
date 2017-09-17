@@ -5,6 +5,12 @@ const cookieParser = require('cookie-parser');
 var app = express();
 app.use(session({
 	secret: 'XASDASDA'
+	, cookie: {
+		ssn: {
+			name: ''
+			, token: ''
+		}
+	}
 }));
 app.use(cookieParser());
 var http = require('http');
