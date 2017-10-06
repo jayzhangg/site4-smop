@@ -1,18 +1,30 @@
 var express = require('express');
 var session = require('express-session');
 const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
 var app = express();
-app.use(session({
-	secret: 'XASDASDA'
-	, cookie: {
-		ssn: {
-			name: ''
-			, token: ''
+
+function setCookie(cname, cvalue, exdays) {
+	var d = new Date();
+	d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+	var expires = "expires=" + d.toUTCString();
+	document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+	var name = cname + "=";
+	var decodedCookie = decodeURIComponent(document.cookie);
+	var ca = decodedCookie.split(';');
+	for (var i = 0; i < ca.length; i++) {
+		var c = ca[i];
+		while (c.charAt(0) == ' ') {
+			c = c.substring(1);
+		}
+		if (c.indexOf(name) == 0) {
+			return c.substring(name.length, c.length);
 		}
 	}
-}));
-app.use(cookieParser());
+	return "";
+}
 var http = require('http');
 var qs = require("querystring");
 var crypto = require('crypto');
@@ -43,8 +55,8 @@ router.get('/index', (req, res) => {
 });
 //login
 router.post('/login', (req, res) => {
-	var ssn = req.session;
-	if (!ssn) res.redirect('/');
+	var ssn = JSON.parse(getCookie("ssn"));
+	if () res.redirect('/');
 	if (req.body.user != ('' || null) && req.body.pass != ('' || null)) {
 		ssn.name = req.body.user;
 		var options = {
@@ -82,7 +94,7 @@ router.post('/login', (req, res) => {
 	else res.redirect('/');
 });
 router.post('/login_test', (req, res) => {
-	var ssn = req.session;
+	var ssn = JSON.parse(getCookie("ssn"));
 	if (req.body.user != ('' || null) && req.body.pass != ('' || null)) {
 		ssn.name = req.body.user;
 		var options = {
@@ -104,6 +116,10 @@ router.post('/login_test', (req, res) => {
 				var body = JSON.parse(Buffer.concat(chunks).toString());
 				if (body.success) {
 					ssn.token = body.token;
+					setCookie('ssn', {
+						'name': ssn.name
+						, 'token': ssn.token
+					}, 2); // 2 days expire
 					res.redirect('/loginpage');
 				}
 				else {
@@ -122,8 +138,8 @@ router.post('/login_test', (req, res) => {
 /* GET home page. */
 router.get('/', function (req, res) {
 	// check if token expired
-	var ssn = req.session;
-	console.log(req.session);
+	var ssn = JSON.parse(getCookie("ssn"));
+	console.log(JSON.parse(getCookie("ssn")));
 	if (!ssn) res.redirect('/index');
 	else {
 		var options = {
@@ -166,7 +182,7 @@ router.get('/new_user', function (req, res) {
 });
 router.get('/options', (req, res) => {
 	// check if token expired
-	var ssn = req.session;
+	var ssn = JSON.parse(getCookie("ssn"));
 	if (!ssn) res.redirect('/');
 	var options = {
 		'method': 'GET'
@@ -198,7 +214,7 @@ router.get('/options', (req, res) => {
 });
 router.get('/owner_home', (req, res) => {
 	// get info
-	var ssn = req.session;
+	var ssn = JSON.parse(getCookie("ssn"));
 	var options = {
 		"method": "GET"
 		, "hostname": hostname
@@ -233,7 +249,7 @@ router.get('/owner_home', (req, res) => {
 });
 router.get('/coder_home', (req, res) => {
 	// get info
-	var ssn = req.session;
+	var ssn = JSON.parse(getCookie("ssn"));
 	if (!ssn) res.redirect('/');
 	var options = {
 		"method": "GET"
@@ -358,7 +374,7 @@ router.post('/create_user_test', (req, res) => {
 });
 // post editor save
 router.post('/post_EditorSave', (req, res) => {
-	var ssn = req.session;
+	var ssn = JSON.parse(getCookie("ssn"));
 	if (!ssn) res.redirect('/');
 	var options = {
 		"method": "POST"
@@ -402,7 +418,7 @@ router.post('/post_EditorSave', (req, res) => {
 });
 // post codeCheck
 router.post('/post_CodeCheck', (req, res) => {
-	var ssn = req.session;
+	var ssn = JSON.parse(getCookie("ssn"));
 	if (!ssn) res.redirect('/');
 	var options = {
 		'method': 'GET'
@@ -467,7 +483,7 @@ router.post('/post_CodeCheck', (req, res) => {
 });
 // get task feeds
 router.get('/get_codertaskfeed', (req, res) => {
-	var ssn = req.session;
+	var ssn = JSON.parse(getCookie("ssn"));
 	if (!ssn) res.redirect('/');
 	var options = {
 		"method": "GET"
@@ -537,7 +553,7 @@ router.get('/get_ownertaskfeed', (req, res) => {
 });
 // Owner Create Task
 router.post('/create_task', (req, res) => {
-	var ssn = req.session;
+	var ssn = JSON.parse(getCookie("ssn"));
 	if (!ssn) res.redirect('/');
 	var options = {
 		"method": "POST"
@@ -584,7 +600,7 @@ router.post('/create_task', (req, res) => {
 });
 // Get Single Task
 router.get('/get_singletask', (req, res) => {
-	var ssn = req.session;
+	var ssn = JSON.parse(getCookie("ssn"));
 	if (!ssn) res.redirect('/');
 	var options = {
 		"method": "GET"
@@ -622,7 +638,7 @@ router.get('/get_singletask', (req, res) => {
 });
 // Get Task Status
 router.get('/get_taskStatus', (req, res) => {
-	var ssn = req.session;
+	var ssn = JSON.parse(getCookie("ssn"));
 	if (!ssn) res.redirect('/');
 	var options = {
 		"method": "GET"
@@ -661,7 +677,7 @@ router.get('/get_taskStatus', (req, res) => {
 });
 // Post Update Task
 router.post('/update_task', (req, res) => {
-	var ssn = req.session;
+	var ssn = JSON.parse(getCookie("ssn"));
 	if (!ssn) res.redirect('/');
 	var options = {
 		"method": "POST"
