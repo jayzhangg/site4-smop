@@ -61,6 +61,7 @@ router.post('/login', (req, res) => {
 					res.redirect('/options');
 				}
 				else {
+					console.log(body);
 					res.redirect('/');
 				}
 			});
