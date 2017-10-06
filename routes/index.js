@@ -42,13 +42,13 @@ router.post('/login', (req, res) => {
 				, "cache-control": "no-cache"
 			}
 		};
-		console.log('ssn:', ssn);
 		var reqInner = http.request(options, function (result) {
 			var chunks = [];
 			result.on("data", function (chunk) {
 				chunks.push(chunk);
 			});
 			result.on("end", function () {
+				console.log(ssn);
 				var body = JSON.parse(Buffer.concat(chunks).toString());
 				if (body.success) {
 					ssn.token = body.token;
