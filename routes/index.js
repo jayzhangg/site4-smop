@@ -56,7 +56,7 @@ router.get('/index', (req, res) => {
 //login
 router.post('/login', (req, res) => {
 	var ssn = JSON.parse(getCookie("ssn"));
-	if () res.redirect('/');
+	if (!ssn) res.redirect('/');
 	if (req.body.user != ('' || null) && req.body.pass != ('' || null)) {
 		ssn.name = req.body.user;
 		var options = {
