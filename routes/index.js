@@ -51,6 +51,7 @@ router.post('/login', (req, res) => {
 				var body = JSON.parse(Buffer.concat(chunks).toString());
 				if (body.success) {
 					ssn.token = body.token;
+					console.log('ssn:', ssn);
 					res.cookie('ssn', ssn, {
 						maxAge: 3600000 // 1hr
 							
