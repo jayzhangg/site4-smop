@@ -1,5 +1,7 @@
+var express = require('express');
 var session = require('express-session');
 const bodyParser = require('body-parser');
+var router = express.Router();
 
 function setCookie(cname, cvalue, exdays) {
 	var d = new Date();
@@ -42,11 +44,6 @@ var sha512 = function (password, salt) {
 		, passwordHash: value
 	};
 }
-app.use(express.static('public'));
-app.use(bodyParser.urlencoded({
-	extended: true
-}));
-var router = express.Router();
 const MongoClient = require('mongodb').MongoClient;
 router.get('/index', (req, res) => {
 	res.render('index');
