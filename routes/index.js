@@ -42,6 +42,7 @@ router.post('/login', (req, res) => {
 				, "cache-control": "no-cache"
 			}
 		};
+		console.log('ssn:', ssn);
 		var reqInner = http.request(options, function (result) {
 			var chunks = [];
 			result.on("data", function (chunk) {
