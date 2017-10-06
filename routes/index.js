@@ -1,7 +1,5 @@
-var express = require('express');
 var session = require('express-session');
 const bodyParser = require('body-parser');
-var app = express();
 
 function setCookie(cname, cvalue, exdays) {
 	var d = new Date();
@@ -31,7 +29,7 @@ var crypto = require('crypto');
 var hostname = '18.220.173.197';
 //var hostname = "localhost";
 var port = '';
-// var port = '3001'
+// var port = '3000'
 var genRandomString = function (length) {
 	return crypto.randomBytes(Math.ceil(length / 2)).toString('hex') /** convert to hexadecimal format */ .slice(0, length); /** return required number of characters */
 };
