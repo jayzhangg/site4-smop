@@ -58,9 +58,7 @@ router.post('/login', (req, res) => {
 							
 						, httpOnly: true
 					});
-					res.set({
-						ssn: ssn
-					});
+					res.header('ssn', ssn);
 					res.redirect('/options');
 				}
 				else {
