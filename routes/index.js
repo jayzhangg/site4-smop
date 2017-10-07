@@ -157,7 +157,10 @@ router.get('/new_user', function (req, res) {
 router.get('/options', (req, res) => {
 	// check if token expired
 	var ssn = req.headers['ssn'];
-	if (!ssn) res.redirect('/');
+	if (!ssn) {
+		console.log('redirection asshole');
+		res.redirect('/');
+	}
 	else {
 		var options = {
 			'method': 'GET'
