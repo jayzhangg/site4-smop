@@ -156,9 +156,9 @@ router.get('/new_user', function (req, res) {
 });
 router.get('/options', (req, res) => {
 	// check if token expired
-	var ssn = req.get('ssn');
+	var ssn = req.cookies.ssn;
 	if (!ssn) {
-		console.log(req);
+		console.log(req.cookies);
 		res.redirect('/');
 	}
 	else {
