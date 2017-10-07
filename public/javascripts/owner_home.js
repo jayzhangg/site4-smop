@@ -10,7 +10,6 @@ function submitForm() {
 			, 'bounty': $('#bounty').val()
 			, 'task_pet_code': editors[0].getValue()
 			, 'task_unit_tests': editors[1].getValue()
-			, 'ssn': ssn()
 		}).done(() => {
 			location.reload();
 		});
@@ -25,7 +24,6 @@ function submitForm() {
 			, 'bounty': $('#bounty').val()
 			, 'task_pet_code': editors[0].getValue()
 			, 'task_unit_tests': editors[1].getValue()
-			, 'ssn': ssn()
 		}).done(() => {
 			location.reload();
 		});
@@ -37,7 +35,6 @@ function editTask(id) {
 	$.get("get_singletask", {
 		'data': id
 		, 'coder_owner': 'owner'
-		, 'ssn': ssn()
 	}).done(function (res) {
 		var m = res.message[0];
 		if (res.mtype == 'json') { //mtype
@@ -55,7 +52,6 @@ function editTask(id) {
 function checkStatus(id, key, innerTask, callback) {
 	$.get('get_taskStatus', {
 		'data': id
-		, 'ssn': ssn()
 	}).done((res) => {
 		switch (res.message) {
 		case 'fail':
@@ -76,10 +72,7 @@ function checkStatus(id, key, innerTask, callback) {
 // render the task feed
 $(document).ready(function () {
 	$.ajax({
-		beforeSend: function (xhr) {
-			xhr.setRequestHeader('ssn', ssn());
-		}
-		, type: "GET"
+		type: "GET"
 		, url: "get_codertaskfeed"
 		, complete: function (data) {
 			var m = data.responseJSON.message;
