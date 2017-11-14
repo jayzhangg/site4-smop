@@ -73,7 +73,7 @@ function checkStatus(id, key, innerTask, callback) {
 $(document).ready(function () {
 	$.ajax({
 		type: "GET"
-		, url: "get_codertaskfeed"
+		, url: "get_ownertaskfeed"
 		, complete: function (data) {
 			var m = data.responseJSON.message;
 			if (typeof m != 'string') {
