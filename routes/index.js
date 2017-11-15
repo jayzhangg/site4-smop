@@ -7,7 +7,7 @@ var qs = require("querystring");
 var crypto = require('crypto');
 //var hostname = '18.220.173.197';
 var hostname = "localhost";
-var port = '';
+//var port = '';
 var port = '3001'
 var genRandomString = function (length) {
 	return crypto.randomBytes(Math.ceil(length / 2)).toString('hex') /** convert to hexadecimal format */ .slice(0, length); /** return required number of characters */
@@ -261,6 +261,38 @@ router.get('/coder_home', (req, res) => {
 	});
 	reqInner.end();
 });
+router.get('/verify_email', (req, res) => {
+	var options = {
+		"method": "POST"
+		, "hostname": hostname
+		, "port": port
+		, "path": "/verifyUser"
+		, "headers": {
+			"content-type": "application/x-www-form-urlencoded"
+			, "cache-control": "no-cache"
+		}
+	}
+	var reqInner = http.request(options, (result) => {
+		var chunks = [];
+		result.on('data', (chunk) => {
+			chunks.push(chunk);
+		});
+		result.on("end", () => {
+			var body = JSON.parse(Buffer.concat(chunks).toString());
+			if (body.success) {
+				console.log('worked!');
+				res.redirect('/');
+			}
+			else {
+				res.redirect('/');
+			}
+		});
+	});
+	reqInner.write(qs.stringify({
+		_id: req.query._id
+	}));
+	reqInner.end();
+});
 router.post('/create_user', (req, res) => {
 	if (req.body.user2 != '' && req.body.pass2 != '' && req.body.passCheck != '') {
 		var options = {
@@ -295,7 +327,8 @@ router.post('/create_user', (req, res) => {
 			name: req.body.user
 			, password: data.passwordHash
 			, salt: data.salt
-			, admin: false
+			, email: req.body.email
+			, admin: true
 		}));
 		reqInner.end();
 	}
