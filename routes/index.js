@@ -291,6 +291,7 @@ router.get('/verify_email', (req, res) => {
 	reqInner.write(qs.stringify({
 		_id: req.query._id
 	}));
+	reqInner.end();
 });
 router.post('/create_user', (req, res) => {
 	if (req.body.user2 != '' && req.body.pass2 != '' && req.body.passCheck != '') {
