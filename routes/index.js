@@ -5,17 +5,14 @@ var router = express.Router();
 var http = require('http');
 var qs = require("querystring");
 var crypto = require('crypto');
-<<<<<<< HEAD
 //var hostname = '18.220.173.197';
 var hostname = "localhost";
 // var port = '';
 var port = '3001'
-=======
 // var hostname = '18.220.173.197';
 var hostname = "localhost";
 // var port = '';
-var port = '3000'
->>>>>>> 33b08271d186261e351617bbc2f9e80a94697c87
+// var port = '3000'
 var genRandomString = function (length) {
 	return crypto.randomBytes(Math.ceil(length / 2)).toString('hex') /** convert to hexadecimal format */ .slice(0, length); /** return required number of characters */
 };
