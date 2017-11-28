@@ -1,0 +1,12 @@
+undefined:1
+welp, that's a 404.
+^
+
+SyntaxError: Unexpected token w in JSON at position 0
+    at JSON.parse (<anonymous>)
+    at IncomingMessage.<anonymous> (/Users/jayzhang/Desktop/sites/site4-smop/routes/index.js:136:21)
+    at emitNone (events.js:110:20)
+    at IncomingMessage.emit (events.js:207:7)
+    at endReadableNT (_stream_readable.js:1059:12)
+    at _combinedTickCallback (internal/process/next_tick.js:138:11)
+    at process._tickCallback (internal/process/next_tick.js:180:9)

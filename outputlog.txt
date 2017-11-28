@@ -1,3 +1,10 @@
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 74255a1ff9050b130e72a04fc016b606b72276b3
+>>>>>>> f1dff93ad67f8b21f3646051edaad59ba305961c
 [PM2] Spawning PM2 daemon with pm2_home=/Users/jayzhang/.pm2
 [PM2] PM2 Successfully daemonized
 [PM2] Starting /Users/jayzhang/Desktop/sites/site4-smop/bin/www.js in fork_mode (1 instance)
@@ -8,3 +15,12 @@
 │ www      │ 0  │ fork │ 31048 │ online │ 0       │ 0s     │ 0%  │ 14.3 MB   │ jayzhang │ disabled │
 └──────────┴────┴──────┴───────┴────────┴─────────┴────────┴─────┴───────────┴──────────┴──────────┘
  Use `pm2 show <id|name>` to get more details about an app
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+=======
+[0mGET /api/checkToken [33m404 [0m3.900 ms - 19[0m
+>>>>>>> 33b08271d186261e351617bbc2f9e80a94697c87
+>>>>>>> 74255a1ff9050b130e72a04fc016b606b72276b3
+>>>>>>> f1dff93ad67f8b21f3646051edaad59ba305961c
