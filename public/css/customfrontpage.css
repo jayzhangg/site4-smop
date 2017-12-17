@@ -6,8 +6,8 @@ Custom CSS not included in Bootstrap
 */
 
 body {
-	padding-top: 5vh;
-	background-color: #fafafa;
+	padding-top: 0px;
+	background-color: var(--main-bg);
 	font: normal 1.5vmax 'Lato', sans-serif;
 }
 
@@ -16,6 +16,10 @@ a {
 	color: #808070;
 	text-decoration: none;
 	font-weight: bolder;
+}
+
+p {
+	margin: 0 0 15vh;
 }
 
 h1 {
@@ -47,11 +51,43 @@ i {
 	text-decoration-color: #202020;
 }
 
+.hero {
+	font-size: 300%;
+	background-color: var(--main-bg);
+	vertical-align: center;
+}
+
+.notHeroD {
+	width: 100vw;
+	position: relative;
+	background: linear-gradient(var(--tertiary-bg), var(--secondary-bg), var(--secondary-bg), var(--secondary-bg));
+}
+
+.notHeroD:after {
+	bottom: 100%;
+	left: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+	border-color: rgba(136, 183, 213, 0);
+	border-bottom-color: var(--tertiary-bg);
+	border-width: 7vh;
+	margin-left: -7vh;
+}
+
+.notHeroL {
+	width: 100vw;
+	position: relative;
+	background-color: var(--main-bg);
+}
+
 .centered,
 .notCentered,
 .info {
-	padding: 5vh 5vw;
-	display: none;
+	padding: 5vh 0;
 	margin: 0 auto;
 }
 
@@ -59,8 +95,6 @@ i {
 	padding: 0px;
 	margin: 0px, auto;
 	width: 90vw;
-	/*	display: none;
-	*/
 }
 
 .notCentered {
@@ -69,20 +103,39 @@ i {
 
 .centered {
 	text-align: center;
-	height: auto;
-	width: 50vw;
-	margin-left: auto;
-	margin-right: auto;
+	height: 90vh;
+	width: 100vw;
+	margin: auto;
 	position: relative;
-	float: none;
+}
+
+.verticalcenter {
+	padding: 0 5vw;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.notCentered p {
+	margin: auto;
 }
 
 .notCentered#L {
-	text-align: left;
+	text-align: center !important;
 	float: left;
+	padding-left: 5vw;
+}
+
+.notCentered gr {
+	color: var(--owner-color);
 }
 
 .notCentered#R {
-	text-align: right;
+	text-align: center !important;
 	float: right;
+	padding-right: 5vw;
+}
+
+.notCentered bl {
+	color: var(--coder-color);
 }
