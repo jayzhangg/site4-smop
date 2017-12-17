@@ -34,3 +34,16 @@
 				<br/> oh, and only the first person to finish the task (successfully) gets paid. <b>glhf</b>.</p>
 		</div>
 		<br/> </div> <a id="mvpLogin" class="loginButtonFont" href='fauxlogin' style="font-size:12pt; display: none">MVP LOGIN</a>
+	<script type="text/javascript">
+		var fadeTime = 2000;
+		$(".flyin1").fadeIn(fadeTime, function () {
+			$(".flyin2").fadeIn(fadeTime, function () {
+				$(".flyin3").fadeIn(fadeTime, function () {
+					$(".flyin4").fadeIn(fadeTime);
+				});
+			});
+		});
+		$(function () {
+			$("#mvpLogin").show();
+		});
+	</script>
