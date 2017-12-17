@@ -60,7 +60,7 @@ i {
 .notHeroD {
 	width: 100vw;
 	position: relative;
-	background: linear-gradient(var(--tertiary-bg), var(--secondary-bg), var(--secondary-bg), var(--secondary-bg));
+	background: linear-gradient(var(--tertiary-bg), var(--secondary-bg), var(--secondary-bg), var(--main-bg));
 }
 
 .notHeroD:after {
