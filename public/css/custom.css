@@ -1,11 +1,26 @@
 /**********
+Variables
+*/
+
+:root {
+	--main-bg: #fafafa;
+	--main-txt: #202020;
+	--main-a: #808070;
+	--secondary-bg: #f0f0f0;
+	--tertiary-bg: #e0e0e0;
+	--owner-color: #205020;
+	--coder-color: #405575
+}
+
+
+/**********
 General
 */
 
 head {
 	padding-top: 80px;
 	padding-bottom: 40px;
-	background-color: #fafafa;
+	background-color: var(--main-bg);
 	margin-right: auto;
 	margin-left: auto;
 }
@@ -13,10 +28,26 @@ head {
 body {
 	padding-top: 80px;
 	padding-bottom: 40px;
-	background-color: #fafafa;
+	background-color: var(--main-bg);
 	font: normal 14px 'Lato', sans-serif;
 	margin-right: auto;
 	margin-left: auto;
+}
+
+.footer {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background-color: var(--secondary-bg);
+	color: var(--main-txt);
+	text-align: center;
+	height: 16pt;
+	font-size: 12pt;
+}
+
+.footer a {
+	color: var(--main-txt);
 }
 
 h1 {
@@ -25,7 +56,7 @@ h1 {
 
 a {
 	font-family: Courier New, Courier, Lucida Sans Typewriter, Lucida Typewriter, monospace;
-	color: #808070;
+	color: var(--main-a);
 	text-decoration: none;
 	font-weight: bolder;
 	cursor: pointer;
@@ -40,7 +71,7 @@ a {
 }
 
 .customInput {
-	background-color: #fafafa !important;
+	background-color: var(--main-bg) !important;
 	height: 14pt !important;
 	width: 100%;
 	resize: none;
@@ -77,7 +108,7 @@ a {
 	appearance: none;
 	box-shadow: none;
 	border-radius: 0;
-	background-color: #fafafa;
+	background-color: var(--main-bg);
 	border: none;
 	display: block;
 	text-align: center;
@@ -98,7 +129,7 @@ a {
 
 .Basic-Paragraph {
 	-epub-ruby-position: over;
-	color: #202020;
+	color: var(--main-txt);
 	font-size: 12px;
 	font-style: normal;
 	font-variant: normal;
@@ -179,20 +210,20 @@ option.html
 }
 
 .dropdown {
-    float: right;
-    position: relative;
-    display: inline-block;
+	float: right;
+	position: relative;
+	display: inline-block;
 	margin-right: 13vw;
 }
 
 .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    overflow: auto;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
+	display: none;
+	position: absolute;
+	background-color: #f9f9f9;
+	min-width: 160px;
+	overflow: auto;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	z-index: 1;
 	box-shadow: 0px 0px 0px 0px;
 }
 
@@ -201,25 +232,30 @@ option.html
 }
 
 .dropdown-content a {
-    color: #808070;
-    padding: 10px 12px;
-    text-decoration: none;
-    display: block;
+	color: var(--main-a);
+	padding: 10px 12px;
+	text-decoration: none;
+	display: block;
 	text-align: left;
-	background-color: #fafafa;
+	background-color: var(--main-bg);
 	font-size: 1.1vw;
 }
 
-.dropdown a:hover {background-color: #f1f1f1}
+.dropdown a:hover {
+	background-color: #f1f1f1
+}
 
-.show {display:block;}
+.show {
+	display: block;
+}
 
 .optionDropdown {
-    border: none;
-    border-radius: 4px;
-    padding: 5px;
-    width: 10vh;
+	border: none;
+	border-radius: 4px;
+	padding: 5px;
+	width: 10vh;
 }
+
 
 /**********
 ACE.js stuff
@@ -238,7 +274,7 @@ ACE.js stuff
 #editorReturn {
 	position: relative;
 	font-family: Courier New, Courier, Lucida Sans Typewriter, Lucida Typewriter, monospace;
-	color: #303030;
+	color: var(--main-txt);
 	text-decoration: none;
 	font-weight: bolder;
 	width: 50vw;
@@ -288,11 +324,11 @@ Coder/Owner Home
 }
 
 .codercolor {
-	color: #405575;
+	color: var(--coder-color);
 }
 
 .ownercolor {
-	color: #205020;
+	color: var(--owner-color);
 }
 
 .feedtask {
