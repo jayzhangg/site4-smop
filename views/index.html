@@ -1,55 +1,46 @@
 <body>
 	<!-- customfrontpage css -->
 	<link rel="stylesheet" type="text/css" href="../css/customfrontpage.css">
-	<div class="centered flyin1">
-		<h1>smop<m>.</m></h1>
-		<p>a minimal, web-based, task-focused software development engagements manager</p>
-	</div>
-	<br/>
-	<div class="container">
-		<br/>
-		<div class="notCentered flyin2" id="L">
-			<h2>for the software "owner"</h2>
-			<p>smop. takes the work out of hiring developers for your occasional (or otherwise) coding needs</p>
-		</div>
-		<div class="notCentered flyin3" id="R">
-			<h2>for the software "coder"</h2>
-			<p>smop. puts the exact tasks you want to see right at your fingertips</p>
+	<div class="centered hero">
+		<div class="verticalcenter">
+			<h1>smop<m>.</m></h1>
+			<p>a minimal, web-based, task-focused software development engagements manager</p>
 		</div>
 	</div>
-	<br/>
-	<div class="centered flyin4">
-		<h2>how?</h2>
-		<p>for us, it's a complex network of backend microservers running asynchronously, but for you, it's just a simple matter of programming</p>
+	<div class="notHeroD">
+		<div style="overflow:auto;">
+			<div class="notCentered" id="L">
+				<div>
+					<h2>software "<b><bl>coders</bl></b>"</h2>
+					<p>smop. puts the exact tasks you want to see right at your fingertips</p>
+				</div>
+			</div>
+			<div class="notCentered" id="R">
+				<div>
+					<h2>software "<b><gr>owners</gr></b>"</h2>
+					<p>smop. takes the work out of hiring developers for your occasional (or otherwise) coding needs</p>
+				</div>
+			</div>
+		</div>
 	</div>
-	<div class="container">
-		<br/>
-		<div class="flyin4 info">
-			<h3>the deal:</h3>
-			<br/>
-			<p>say you are a proud software company <b>owner</b> who's had that one story in the icebox for a little too long, or maybe you have to just get those last few tasks done in time for the coming retrospective, smop. is a platform where you can outsource that user story, or as we call it, the "task", to the best candidate. every time.</p>
-			<br/>
-			<p>say you are a <b>coder</b> and you're too busy to deal with a full-time boss or you want some quick cash, all you do is make a free account and smop. will put together a list of tasks you can try your hand at winning.
-				<br/>
-				<br/> oh, and only the first person to finish the task (successfully) gets paid. <b>glhf</b>.</p>
-			<br/>
-			<br/>
-			<br/><i><a href="mailto:recruiting@smop.io">recruiting@smop.io</a></i> </div>
+	<div class="notHeroL">
+		<div style="overflow:auto">
+			<div class="notCentered" id="L">
+				<div>
+					<h2>how?</h2>
+					<p>for us, it's a complex network of backend microservers running asynchronously, but for you, it's just a <b>simple matter of programming.</b></p>
+				</div>
+			</div>
+			<div class="notCentered" id="R">
+				<div>
+					<h2>the deal.</h2>
+					<p>say you are a proud software company <b><gr>owner</gr></b> who's had that one story in the icebox for a little too long, or maybe you have to just get those last few tasks done in time for the coming retrospective, smop. is a platform where you can outsource that user story, or as we call it, the "task", to the best candidate. every time.</p>
+					<br/>
+					<p>say you are a <b><bl>coder</bl></b> and you're too busy to deal with a full-time boss or you want some quick cash, all you do is make a free account and smop. will put together a list of tasks you can try your hand at winning.</p>
+					<br/>
+					<br/>
+					<p>oh, and only the first person to finish the task (successfully) gets paid. <b>glhf</b>.</p>
+				</div>
+			</div>
+		</div>
 	</div>
-	<br/><a id="mvpLogin" class="loginButtonFont" href='fauxlogin' style="font-size:12pt; display: none">MVP LOGIN</a>
-	<script type="text/javascript">
-		var fadeTime = 2000;
-		$(".flyin1").fadeIn(fadeTime, function () {
-			$(".flyin2").fadeIn(fadeTime, function () {
-				$(".flyin3").fadeIn(fadeTime, function () {
-					$(".flyin4").fadeIn(fadeTime);
-				});
-			});
-		});
-		$(function () {
-			$("#mvpLogin").show();
-		});
-	</script>
-</body>
-
-</html>
